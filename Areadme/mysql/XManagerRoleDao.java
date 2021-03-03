@@ -1,0 +1,15 @@
+import java.util.List;
+public interface XManagerRoleDao {
+    public int insertRecord(XManagerRolePojo record);
+
+    public XManagerRolePojo getRecordByKey(XManagerRolePojo record);
+
+    public XManagerRolePojo getRecordByWhere(XManagerRolePojo record);
+
+    public List<XManagerRolePojo> getRecordListByWhere(XManagerRolePojo record);
+
+    public int updateRecordByKey(XManagerRolePojo record);
+
+    public int deleteRecordByKey(XManagerRolePojo record);
+
+}

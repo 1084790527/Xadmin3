@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="x_admin" />
+        <module name="x_bean" />
+        <module name="x_common" />
+        <module name="x_dao" />
+        <module name="x_service" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="demo" target="1.8" />
+      <module name="x_admin" target="1.8" />
+      <module name="x_bean" target="1.8" />
+      <module name="x_common" target="1.8" />
+      <module name="x_dao" target="1.8" />
+      <module name="x_service" target="1.8" />
+      <module name="xadmin" target="1.8" />
+      <module name="Xadmin3" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="XManagerRoleDao">
+  <resultMap id="BaseResultMap" type="XManagerRolePojo">
+    <result column="manager_id" jdbcType="VARCHAR" property="managerId" />
+    <result column="role_id" jdbcType="VARCHAR" property="roleId" />
+    <result column="cre_oper_id" jdbcType="VARCHAR" property="creOperId" />
+    <result column="cre_oper_date" jdbcType="TIMESTAMP" property="creOperDate" />
+  </resultMap>
+  <sql id="where">
+    <where>
+      <if test="managerId != null">
+        and t.manager_id =  #{managerId,jdbcType=VARCHAR}
+      </if>
+      <if test="roleId != null">
+        and t.role_id =  #{roleId,jdbcType=VARCHAR}
+      </if>
+      <if test="creOperId != null">
+        and t.cre_oper_id =  #{creOperId,jdbcType=VARCHAR}
+      </if>
+      <if test="creOperDate != null">
+        and t.cre_oper_date =  #{creOperDate,jdbcType=TIMESTAMP}
+      </if>
+    </where>
+  </sql>
+  <sql id="keyWhere">
+    <where>
+    </where>
+  </sql>
+  <sql id="insertColumnsVal">
+    <trim prefix="values(" suffix=")" suffixOverrides=",">
+      <if test="managerId != null" >
+        #{managerId,jdbcType=VARCHAR},
+      </if>
+      <if test="roleId != null" >
+        #{roleId,jdbcType=VARCHAR},
+      </if>
+      <if test="creOperId != null" >
+        #{creOperId,jdbcType=VARCHAR},
+      </if>
+      <if test="creOperDate != null" >
+        #{creOperDate,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </sql>
+
+  <sql id="insertColumns">
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="managerId != null" >
+        manager_id,
+      </if>
+      <if test="roleId != null" >
+        role_id,
+      </if>
+      <if test="creOperId != null" >
+        cre_oper_id,
+      </if>
+      <if test="creOperDate != null" >
+        cre_oper_date,
+      </if>
+    </trim>
+  </sql>
+
+  <sql id="updateColumnVal">
+    <set>
+      <if test="managerId != null" >
+        manager_id = #{managerId,jdbcType=VARCHAR},
+      </if>
+      <if test="roleId != null" >
+        role_id = #{roleId,jdbcType=VARCHAR},
+      </if>
+      <if test="creOperId != null" >
+        cre_oper_id = #{creOperId,jdbcType=VARCHAR},
+      </if>
+      <if test="creOperDate != null" >
+        cre_oper_date = #{creOperDate,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+  </sql>
+
+    <insert id="insertRecord">
+        INSERT INTO x_manager_role <include refid="insertColumns" /> <include refid="insertColumnsVal" />
+    </insert>
+
+    <select id="getRecordByKey" resultMap="BaseResultMap" >
+        SELECT * FROM x_manager_role t <include refid="keyWhere" />
+    </select>
+
+    <select id="getRecordByWhere" resultMap="BaseResultMap" >
+        SELECT * FROM x_manager_role t <include refid="where" />
+    </select>
+
+    <select id="getRecordListByWhere" resultMap="BaseResultMap" >
+        SELECT * FROM x_manager_role t <include refid="where" />
+    </select>
+
+    <update id="updateRecordByKey">
+        UPDATE x_manager_role t <include refid="updateColumnVal" /> <include refid="keyWhere" />
+    </update>
+
+    <update id="deleteRecordByKey">
+        DELETE FROM x_manager_role WHERE id = #{id,jdbcType=VARCHAR}
+    </update>
+
+</mapper>
