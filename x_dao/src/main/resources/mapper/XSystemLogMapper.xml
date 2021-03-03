@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yao.dao.XSystemLogDao">
+  <resultMap id="BaseResultMap" type="com.yao.bean.pojo.XSystemLogPojo">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="request_url" jdbcType="VARCHAR" property="requestUrl" />
+    <result column="method" jdbcType="VARCHAR" property="method" />
+    <result column="ip" jdbcType="VARCHAR" property="ip" />
+    <result column="class_method" jdbcType="VARCHAR" property="classMethod" />
+    <result column="args" jdbcType="VARCHAR" property="args" />
+    <result column="cre_date" jdbcType="TIMESTAMP" property="creDate" />
+    <result column="manager_id" jdbcType="VARCHAR" property="managerId" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+  </resultMap>
+  <sql id="where">
+    <where>
+      <if test="id != null">
+        and t.id =  #{id,jdbcType=VARCHAR}
+      </if>
+      <if test="requestUrl != null">
+        and t.request_url =  #{requestUrl,jdbcType=VARCHAR}
+      </if>
+      <if test="method != null">
+        and t.method =  #{method,jdbcType=VARCHAR}
+      </if>
+      <if test="ip != null">
+        and t.ip =  #{ip,jdbcType=VARCHAR}
+      </if>
+      <if test="classMethod != null">
+        and t.class_method =  #{classMethod,jdbcType=VARCHAR}
+      </if>
+      <if test="args != null">
+        and t.args =  #{args,jdbcType=VARCHAR}
+      </if>
+      <if test="creDate != null">
+        and t.cre_date =  #{creDate,jdbcType=TIMESTAMP}
+      </if>
+      <if test="managerId != null">
+        and t.manager_id =  #{managerId,jdbcType=VARCHAR}
+      </if>
+      <if test="type != null">
+        and t.type =  #{type,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </sql>
+  <sql id="keyWhere">
+    <where>
+      and t.id =  #{id,jdbcType=VARCHAR}
+    </where>
+  </sql>
+  <sql id="insertColumnsVal">
+    <trim prefix="values(" suffix=")" suffixOverrides=",">
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="requestUrl != null" >
+        #{requestUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="method != null" >
+        #{method,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null" >
+        #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="classMethod != null" >
+        #{classMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="args != null" >
+        #{args,jdbcType=VARCHAR},
+      </if>
+      <if test="creDate != null" >
+        #{creDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="managerId != null" >
+        #{managerId,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </sql>
+
+  <sql id="insertColumns">
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="requestUrl != null" >
+        request_url,
+      </if>
+      <if test="method != null" >
+        method,
+      </if>
+      <if test="ip != null" >
+        ip,
+      </if>
+      <if test="classMethod != null" >
+        class_method,
+      </if>
+      <if test="args != null" >
+        args,
+      </if>
+      <if test="creDate != null" >
+        cre_date,
+      </if>
+      <if test="managerId != null" >
+        manager_id,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+    </trim>
+  </sql>
+
+  <sql id="updateColumnVal">
+    <set>
+      <if test="id != null" >
+        id = #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="requestUrl != null" >
+        request_url = #{requestUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="method != null" >
+        method = #{method,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null" >
+        ip = #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="classMethod != null" >
+        class_method = #{classMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="args != null" >
+        args = #{args,jdbcType=VARCHAR},
+      </if>
+      <if test="creDate != null" >
+        cre_date = #{creDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="managerId != null" >
+        manager_id = #{managerId,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+    </set>
+  </sql>
+
+    <insert id="insertRecord">
+        INSERT INTO x_system_log <include refid="insertColumns" /> <include refid="insertColumnsVal" />
+    </insert>
+
+    <select id="getRecordByKey" resultMap="BaseResultMap" >
+        SELECT * FROM x_system_log t <include refid="keyWhere" />
+    </select>
+
+    <select id="getRecordByWhere" resultMap="BaseResultMap" >
+        SELECT * FROM x_system_log t <include refid="where" />
+    </select>
+
+    <select id="getRecordListByWhere" resultMap="BaseResultMap" >
+        SELECT * FROM x_system_log t <include refid="where" />
+    </select>
+
+    <update id="updateRecordByKey">
+        UPDATE x_system_log t <include refid="updateColumnVal" /> <include refid="keyWhere" />
+    </update>
+
+    <update id="deleteRecordByKey">
+        DELETE FROM x_system_log WHERE id = #{id,jdbcType=VARCHAR}
+    </update>
+
+</mapper>

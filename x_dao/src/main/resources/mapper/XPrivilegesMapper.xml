@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yao.dao.XPrivilegesDao">
+  <resultMap id="BaseResultMap" type="com.yao.bean.pojo.XPrivilegesPojo">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="parent_id" jdbcType="VARCHAR" property="parentId" />
+    <result column="menu_level" jdbcType="NUMERIC" property="menuLevel" />
+    <result column="permission" jdbcType="VARCHAR" property="permission" />
+    <result column="permission_type" jdbcType="NUMERIC" property="permissionType" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="param" jdbcType="VARCHAR" property="param" />
+    <result column="method_type" jdbcType="VARCHAR" property="methodType" />
+    <result column="state" jdbcType="VARCHAR" property="state" />
+  </resultMap>
+  <sql id="where">
+    <where>
+      <if test="id != null">
+        and t.id =  #{id,jdbcType=VARCHAR}
+      </if>
+      <if test="name != null">
+        and t.name =  #{name,jdbcType=VARCHAR}
+      </if>
+      <if test="description != null">
+        and t.description =  #{description,jdbcType=VARCHAR}
+      </if>
+      <if test="parentId != null">
+        and t.parent_id =  #{parentId,jdbcType=VARCHAR}
+      </if>
+      <if test="menuLevel != null">
+        and t.menu_level =  #{menuLevel,jdbcType=NUMERIC}
+      </if>
+      <if test="permission != null">
+        and t.permission =  #{permission,jdbcType=VARCHAR}
+      </if>
+      <if test="permissionType != null">
+        and t.permission_type =  #{permissionType,jdbcType=NUMERIC}
+      </if>
+      <if test="url != null">
+        and t.url =  #{url,jdbcType=VARCHAR}
+      </if>
+      <if test="param != null">
+        and t.param =  #{param,jdbcType=VARCHAR}
+      </if>
+      <if test="methodType != null">
+        and t.method_type =  #{methodType,jdbcType=VARCHAR}
+      </if>
+      <if test="state != null">
+        and t.state =  #{state,jdbcType=VARCHAR}
+      </if>
+    </where>
+  </sql>
+  <sql id="keyWhere">
+    <where>
+      and t.id =  #{id,jdbcType=VARCHAR}
+    </where>
+  </sql>
+  <sql id="insertColumnsVal">
+    <trim prefix="values(" suffix=")" suffixOverrides=",">
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="menuLevel != null" >
+        #{menuLevel,jdbcType=NUMERIC},
+      </if>
+      <if test="permission != null" >
+        #{permission,jdbcType=VARCHAR},
+      </if>
+      <if test="permissionType != null" >
+        #{permissionType,jdbcType=NUMERIC},
+      </if>
+      <if test="url != null" >
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="param != null" >
+        #{param,jdbcType=VARCHAR},
+      </if>
+      <if test="methodType != null" >
+        #{methodType,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </sql>
+
+  <sql id="insertColumns">
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="parentId != null" >
+        parent_id,
+      </if>
+      <if test="menuLevel != null" >
+        menu_level,
+      </if>
+      <if test="permission != null" >
+        permission,
+      </if>
+      <if test="permissionType != null" >
+        permission_type,
+      </if>
+      <if test="url != null" >
+        url,
+      </if>
+      <if test="param != null" >
+        param,
+      </if>
+      <if test="methodType != null" >
+        method_type,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+    </trim>
+  </sql>
+
+  <sql id="updateColumnVal">
+    <set>
+      <if test="id != null" >
+        id = #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        parent_id = #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="menuLevel != null" >
+        menu_level = #{menuLevel,jdbcType=NUMERIC},
+      </if>
+      <if test="permission != null" >
+        permission = #{permission,jdbcType=VARCHAR},
+      </if>
+      <if test="permissionType != null" >
+        permission_type = #{permissionType,jdbcType=NUMERIC},
+      </if>
+      <if test="url != null" >
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="param != null" >
+        param = #{param,jdbcType=VARCHAR},
+      </if>
+      <if test="methodType != null" >
+        method_type = #{methodType,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=VARCHAR},
+      </if>
+    </set>
+  </sql>
+
+    <insert id="insertRecord">
+        INSERT INTO x_privileges <include refid="insertColumns" /> <include refid="insertColumnsVal" />
+    </insert>
+
+    <select id="getRecordByKey" resultMap="BaseResultMap" >
+        SELECT * FROM x_privileges t <include refid="keyWhere" />
+    </select>
+
+    <select id="getRecordByWhere" resultMap="BaseResultMap" >
+        SELECT * FROM x_privileges t <include refid="where" />
+    </select>
+
+    <select id="getRecordListByWhere" resultMap="BaseResultMap" >
+        SELECT * FROM x_privileges t <include refid="where" />
+    </select>
+
+    <update id="updateRecordByKey">
+        UPDATE x_privileges t <include refid="updateColumnVal" /> <include refid="keyWhere" />
+    </update>
+
+    <update id="deleteRecordByKey">
+        DELETE FROM x_privileges WHERE id = #{id,jdbcType=VARCHAR}
+    </update>
+
+</mapper>
