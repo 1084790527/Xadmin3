@@ -25,6 +25,8 @@
   </sql>
   <sql id="keyWhere">
     <where>
+      and t.manager_id =  #{managerId,jdbcType=VARCHAR}
+      and t.role_id =  #{roleId,jdbcType=VARCHAR}
     </where>
   </sql>
   <sql id="insertColumnsVal">
@@ -93,13 +95,24 @@
     <select id="getRecordListByWhere" resultMap="BaseResultMap" >
         SELECT * FROM x_manager_role t <include refid="where" />
     </select>
+    <select id="getRoleIdListByWhere" resultType="java.lang.String">
+        SELECT t.role_id AS roleId FROM x_manager_role t <include refid="where" />
+    </select>
 
-    <update id="updateRecordByKey">
+  <update id="updateRecordByKey">
         UPDATE x_manager_role t <include refid="updateColumnVal" /> <include refid="keyWhere" />
     </update>
 
     <update id="deleteRecordByKey">
-        DELETE FROM x_manager_role WHERE id = #{id,jdbcType=VARCHAR}
+        DELETE FROM x_manager_role
+        <where>
+          <if test="managerId != null">
+            and manager_id =  #{managerId,jdbcType=VARCHAR}
+          </if>
+          <if test="roleId != null">
+            and role_id =  #{roleId,jdbcType=VARCHAR}
+          </if>
+        </where>
     </update>
 
 </mapper>

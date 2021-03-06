@@ -1,0 +1,124 @@
+<div id="side-nav">
+    <ul id="nav">
+    </ul>
+</div>
+
+<script id="menuHtml" type="text/html">
+    {{# layui.each(d,function(index,one){ }}
+    <li>
+        {{# if(one.xPrivileges == null || one.xPrivileges.length == 0 ){ }}
+    <li>
+        <a onclick="xadmin.add_tab('{{ one.name }}',context+'{{ one.url }}',true)">
+            <i class="iconfont">&#xe6a7;</i>
+            <cite>{{ one.name }}</cite></a>
+    </li>
+    {{# }else{ }}
+    <a href="javascript:;">
+        <i class="iconfont left-nav-li" lay-tips="{{ one.name }}">&#xe699;</i>
+        <cite>{{ one.name }}</cite>
+        <i class="iconfont nav_right">&#xe697;</i>
+    </a>
+    <ul class="sub-menu">
+        {{# layui.each(one.xPrivileges,function(index,two){ }}
+        <li>
+            {{# if(two.xPrivileges == null || two.xPrivileges.length == 0 ){ }}
+            <a onclick="xadmin.add_tab('{{ two.name }}',context+'{{ two.url }}',true)">
+                <i class="iconfont">&#xe6a7;</i>
+                <cite>{{ two.name }}</cite></a>
+            {{# }else{ }}
+            <a href="javascript:;">
+                <i class="iconfont left-nav-li" lay-tips="{{ two.name }}">&#xe699;</i>
+                <cite>{{ two.name }}</cite>
+                <i class="iconfont nav_right">&#xe697;</i>
+            </a>
+            <ul class="sub-menu">
+                {{# layui.each(two.xPrivileges,function(index,three){ }}
+                <li>
+                    {{# if(three.xPrivileges == null || three.xPrivileges.length == 0 ){ }}
+                    <a onclick="xadmin.add_tab('{{ three.name }}',context+'{{ three.url }}',true)">
+                        <i class="iconfont">&#xe6a7;</i>
+                        <cite>{{ three.name }}</cite></a>
+                    {{# }else{ }}
+                    <a href="javascript:;">
+                        <i class="iconfont left-nav-li" lay-tips="{{ three.name }}">&#xe699;</i>
+                        <cite>{{ three.name }}</cite>
+                        <i class="iconfont nav_right">&#xe697;</i>
+                    </a>
+                    <ul class="sub-menu">
+                        {{# layui.each(three.xPrivileges,function(index,four){ }}
+                        <li>
+                            {{# if(four.xPrivileges == null || four.xPrivileges.length == 0 ){ }}
+                            <a onclick="xadmin.add_tab('{{ four.name }}',context+'{{ four.url }}',true)">
+                                <i class="iconfont">&#xe6a7;</i>
+                                <cite>{{ four.name }}</cite></a>
+                            {{# }else{ }}
+                            <a href="javascript:;">
+                                <i class="iconfont left-nav-li" lay-tips="{{ four.name }}">&#xe699;</i>
+                                <cite>{{ four.name }}</cite>
+                                <i class="iconfont nav_right">&#xe697;</i>
+                            </a>
+                            <ul class="sub-menu">
+                                {{# layui.each(four.xPrivileges,function(index,five){ }}
+                                <li>
+                                    {{# if(five.xPrivileges == null || five.xPrivileges.length == 0 ){ }}
+                                    <a onclick="xadmin.add_tab('{{ five.name }}',context+'{{ five.url }}',true)">
+                                        <i class="iconfont">&#xe6a7;</i>
+                                        <cite>{{ five.name }}</cite></a>
+                                    {{# }else{ }}
+                                    <a href="javascript:;">
+                                        <i class="iconfont left-nav-li" lay-tips="{{ five.name }}">&#xe699;</i>
+                                        <cite>{{ five.name }}</cite>
+                                        <i class="iconfont nav_right">&#xe697;</i>
+                                    </a>
+                                    <ul class="sub-menu">
+                                        <li>
+                                            !页面需要修改调整
+                                        </li>
+                                    </ul>
+                                    {{# } }}
+                                </li>
+                                {{# }); }}
+                            </ul>
+                            {{# } }}
+                        </li>
+                        {{# }); }}
+                    </ul>
+                    {{# } }}
+                </li>
+                {{# }); }}
+            </ul>
+            {{# } }}
+        </li>
+        {{# }); }}
+    </ul>
+    {{# } }}
+    </li>
+    {{# }); }}
+</script>
+
+<script type="text/javascript">
+
+    layui.use(['laytpl','jquery'], function(){
+        // $('#nav').html('sdasd');
+        var laytpl = layui.laytpl;
+        $.ajax({
+            url: context+'/menu'
+            ,type: 'GET'
+            ,dataType: 'json'
+            ,async: false
+            ,success: function (res) {
+                if (res.state){
+                    // console.log(JSON.stringify(res.data));
+                    var data = res.data;
+                    laytpl($('#menuHtml').html()).render(data,function (html) {
+                        $('#nav').html(html);
+                    });
+                }else {
+                    layui.alert(res.msg);
+                }
+            },error: function (e) {
+                layer.alert('请求异常：'+e.message);
+            }
+        });
+    });
+</script>

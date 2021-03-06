@@ -592,3 +592,21 @@ function getQueryVariable(variable)
     }
     return(false);
 }
+function strToDate(value) {
+    if (value == null || value == '')
+        return '';
+    var date = new Date(parseInt(value, 10));
+    var month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
+    var day = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+    var hours = date.getHours();
+    var minutes = date.getMinutes();
+    var seconds = date.getSeconds();
+    return date.getFullYear() + "-" + month + "-" + day + " " + hours + ":" + minutes + ":" + seconds;
+}
+function jsonToUrlParam(json) {
+    var params = Object.keys(json).map(function (key) {
+        // body...
+        return encodeURIComponent(key) + "=" + encodeURIComponent(json[key]);
+    }).join("&");
+    return params;
+}

@@ -24,7 +24,7 @@ spring:
   datasource:
       type: com.alibaba.druid.pool.DruidDataSource
       driver-class-name: com.mysql.cj.jdbc.Driver
-      url: jdbc:mysql://localhost:3306/xadmin3?useUnicode=true&useSSL=false&serverTimezone=UTC
+      url: jdbc:mysql://localhost:3306/xadmin3?useUnicode=true&useSSL=false&serverTimezone=Asia/Shanghai
       username: root
       password: wingzz00
       druid:
@@ -53,8 +53,8 @@ spring:
         stat-view-servlet:
           # 1.1.10以后的版本需要指定为true 不然默认是关闭的就会出现404
           enabled: true
-          login-username: admin
-          login-password: admin
+          login-username:
+          login-password:
           reset-enable: false
           url-pattern: /druid/*
 mybatis:
@@ -72,4 +72,4 @@ jwt:
     ttl: 3600000
 
 interceptor:
-  noVerify: /welcome,/index,/,/loginOut,/view/info/index,/info,/view/info/resetpwd,/info/resetpwd,/main
+  noVerify: /view/welcome,/index,/,/loginOut,/view/info/index,/view/info,/view/info/resetpwd,/view/info/resetpwd,/menu

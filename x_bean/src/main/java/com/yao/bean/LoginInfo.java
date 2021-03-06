@@ -1,5 +1,6 @@
 package com.yao.bean;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -8,7 +9,7 @@ import java.util.Date;
  */
 
 
-public class LoginInfo {
+public class LoginInfo implements Serializable {
     private String id;
     private String nickname;
     private String mobileNo;

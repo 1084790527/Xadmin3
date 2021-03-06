@@ -14,10 +14,37 @@
     <result column="method_type" jdbcType="VARCHAR" property="methodType" />
     <result column="state" jdbcType="VARCHAR" property="state" />
   </resultMap>
+  <resultMap id="TreeResultMap" type="com.yao.bean.pojo.XPrivilegesPojo">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="parent_id" jdbcType="VARCHAR" property="parentId" />
+    <result column="menu_level" jdbcType="NUMERIC" property="menuLevel" />
+    <result column="permission" jdbcType="VARCHAR" property="permission" />
+    <result column="permission_type" jdbcType="NUMERIC" property="permissionType" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="param" jdbcType="VARCHAR" property="param" />
+    <result column="method_type" jdbcType="VARCHAR" property="methodType" />
+    <result column="state" jdbcType="VARCHAR" property="state" />
+    <collection property="xPrivileges" ofType="com.yao.bean.pojo.XPrivilegesPojo" javaType="java.util.List" column="{id=id}" select="getByParentId">
+
+    </collection>
+  </resultMap>
+
+  <select id="getByParentId" resultMap="TreeResultMap" >
+    SELECT * FROM x_privileges t WHERE t.parent_id = #{id} AND t.state = '1'
+  </select>
+
   <sql id="where">
     <where>
       <if test="id != null">
         and t.id =  #{id,jdbcType=VARCHAR}
+      </if>
+      <if test="ids != null">
+        and t.id IN
+        <foreach collection="ids" item="value" index="index" open="(" close=")" separator=",">
+          #{value,jdbcType=VARCHAR}
+        </foreach>
       </if>
       <if test="name != null">
         and t.name =  #{name,jdbcType=VARCHAR}
@@ -183,6 +210,10 @@
     </select>
 
     <select id="getRecordListByWhere" resultMap="BaseResultMap" >
+        SELECT * FROM x_privileges t <include refid="where" />
+    </select>
+
+    <select id="getTreePrivileges" resultMap="TreeResultMap">
         SELECT * FROM x_privileges t <include refid="where" />
     </select>
 

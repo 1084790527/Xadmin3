@@ -1,10 +1,10 @@
 package com.yao.bean.pojo;
 
-import java.util.Date;
 import java.util.List;
 
 public class XPrivilegesPojo {
     private String id;
+    private List<String> ids;
     private String name;
     private String description;
     private String parentId;
@@ -15,6 +15,26 @@ public class XPrivilegesPojo {
     private String param;
     private String methodType;
     private String state;
+    private List<XPrivilegesPojo> xPrivileges;
+
+    public List<String> getIds() {
+        return ids;
+    }
+
+    public XPrivilegesPojo setIds(List<String> ids) {
+        this.ids = ids;
+        return this;
+    }
+
+    public List<XPrivilegesPojo> getxPrivileges() {
+        return xPrivileges;
+    }
+
+    public XPrivilegesPojo setxPrivileges(List<XPrivilegesPojo> xPrivileges) {
+        this.xPrivileges = xPrivileges;
+        return this;
+    }
+
     public String getId() {
         return id;
     }

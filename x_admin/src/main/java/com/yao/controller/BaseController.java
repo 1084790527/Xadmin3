@@ -4,6 +4,7 @@ package com.yao.controller;
  * @date 17:19 2021/3/2
  */
 
+import com.yao.common.Consts;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.Enumeration;
 
 @RequestMapping
 @Controller
@@ -20,6 +23,8 @@ public class BaseController {
 
     @Autowired
     private HttpServletRequest request;
+    @Autowired
+    private HttpSession session;
 
     @GetMapping
     public String main(){
@@ -34,5 +39,16 @@ public class BaseController {
     @GetMapping(value = {"{path:(?!static\\b)\\w+}/**"})
     public String path(){
         return request.getServletPath();
+    }
+
+    @GetMapping(value = "loginOut")
+    public String loginOut(){
+        //全部删除
+//        Enumeration em = session.getAttributeNames();
+//        while (em.hasMoreElements()){
+//            session.removeAttribute(em.nextElement().toString());
+//        }
+        session.removeAttribute(Consts.LOGIN_INFO);
+        return "redirect:/login";
     }
 }

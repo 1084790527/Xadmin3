@@ -12,6 +12,8 @@ public interface XPrivilegesDao {
 
     public List<XPrivilegesPojo> getRecordListByWhere(XPrivilegesPojo record);
 
+    public List<XPrivilegesPojo> getTreePrivileges(XPrivilegesPojo record);
+
     public int updateRecordByKey(XPrivilegesPojo record);
 
     public int deleteRecordByKey(XPrivilegesPojo record);

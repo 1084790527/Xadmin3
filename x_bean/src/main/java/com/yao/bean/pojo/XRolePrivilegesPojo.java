@@ -5,9 +5,20 @@ import java.util.List;
 
 public class XRolePrivilegesPojo {
     private String roleId;
+    private List<String> roleIds;
     private String privilegesId;
     private String creOperId;
     private Date creOperDate;
+
+    public List<String> getRoleIds() {
+        return roleIds;
+    }
+
+    public XRolePrivilegesPojo setRoleIds(List<String> roleIds) {
+        this.roleIds = roleIds;
+        return this;
+    }
+
     public String getRoleId() {
         return roleId;
     }

@@ -18,6 +18,12 @@
       <if test="id != null">
         and t.id =  #{id,jdbcType=VARCHAR}
       </if>
+      <if test="ids != null">
+        and t.id IN
+        <foreach collection="ids" item="value" index="index" open="(" close=")" separator=",">
+          #{value,jdbcType=VARCHAR}
+        </foreach>
+      </if>
       <if test="name != null">
         and t.name =  #{name,jdbcType=VARCHAR}
       </if>
@@ -29,6 +35,12 @@
       </if>
       <if test="state != null">
         and t.state =  #{state,jdbcType=VARCHAR}
+      </if>
+      <if test="inState != null">
+        and t.state IN
+        <foreach collection="inState" item="value" index="index" open="(" close=")" separator=",">
+          #{value,jdbcType=VARCHAR}
+        </foreach>
       </if>
       <if test="defaults != null">
         and t.defaults =  #{defaults,jdbcType=VARCHAR}
@@ -172,8 +184,11 @@
     <select id="getRecordListByWhere" resultMap="BaseResultMap" >
         SELECT * FROM x_role t <include refid="where" />
     </select>
+    <select id="getIdsListByWhere" resultType="java.lang.String">
+      SELECT t.id AS id FROM x_role t <include refid="where" />
+    </select>
 
-    <update id="updateRecordByKey">
+  <update id="updateRecordByKey">
         UPDATE x_role t <include refid="updateColumnVal" /> <include refid="keyWhere" />
     </update>
 

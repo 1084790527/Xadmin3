@@ -97,10 +97,15 @@ CREATE TABLE x_system_log(
   method VARCHAR(10) COMMENT 'url请求方式',
   ip VARCHAR(80) COMMENT '请求ip',
   class_method VARCHAR(100) COMMENT '类方法',
-  args VARCHAR(1024) COMMENT '请求参数',
+  args VARCHAR(8192) COMMENT '请求参数',
   cre_date DATETIME COMMENT '请求时间',
   manager_id VARCHAR(20) COMMENT '操作员id 可能空',
   type VARCHAR(2) DEFAULT '0' COMMENT '1 登入成功后操作有操作员id  0 还没有登入没有操作员id',
   PRIMARY KEY (id)
 )
   ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci COMMENT='角色-权限';
+停用  disable
+启用  enable
+删除  delete
+  INSERT INTO `xadmin3`.`x_role_privileges`(`role_id`, `privileges_id`) VALUES ('0001', '92121');
+  INSERT INTO `xadmin3`.`x_role_privileges`(`role_id`, `privileges_id`) VALUES ('0001', '92122');

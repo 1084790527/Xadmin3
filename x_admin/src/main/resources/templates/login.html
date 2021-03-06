@@ -14,7 +14,7 @@
     <link rel="stylesheet" th:href="@{/static/css/login.css}">
     <link rel="stylesheet" th:href="@{/static/css/xadmin.css}">
     <script type="text/javascript" th:src="@{/static/js/jquery.min.js}"></script>
-    <!--<script type="text/javascript" th:src="@{/static/js/machineCode.js}"></script>-->
+    <script type="text/javascript" th:src="@{/static/js/machineCode.js}"></script>
     <script th:src="@{/static/lib/layui/layui.js}" charset="utf-8"></script>
     <!--[if lt IE 9]>
     <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
@@ -28,6 +28,8 @@
     <div class="message">系统后台管理</div>
     <div id="darkbannerwrap"></div>
     <form method="post" class="layui-form">
+        <input name="machineCode" id="machineCode" placeholder="机器码" value="" disabled type="text" lay-verify="required" class="layui-input" >
+        <hr class="hr15">
         <input name="mobileNo" id="mobileNo" placeholder="手机号" value="" type="text" lay-verify="required" class="layui-input" >
         <hr class="hr15">
         <input name="password" id="password" lay-verify="required" placeholder="密码" value=""  type="password" class="layui-input">
@@ -38,36 +40,34 @@
 </div>
 
 <script type="text/javascript">
-    console.log(context);
-    // var uuid = getUUID();
+    // console.log(context);
+    var uuid = getUUID();
     // console.log(uuid);
-    $(function () {
-        layui.use(['form'],function () {
-            var form = layui.form;
-            form.on('submit(login)',
-                function(data) {
-                    layer.load(2);
-                    // console.log(data.field);
-                    $.ajax({
-                        url : context+'/login',
-                        type : 'POST',
-                        dataType : 'json',
-                        data : data.field,
-                        async : false,
-                        success : function (data) {
-                            if (data.state){
-                                location.href = context+'/index'
-                            }else {
-                                layer.alert(data.message);
-                            }
-                        },
-                        error : function (e) {
-                            layer.closeAll('loading');
-                            layer.alert(JSON.stringify(e));
+    $('#machineCode').val(uuid);
+    layui.use(['form'],function () {
+        var form = layui.form;
+        form.on('submit(login)',
+            function(data) {
+                layer.load(2);
+                $.ajax({
+                    url : context+'/login',
+                    type : 'POST',
+                    dataType : 'json',
+                    data : data.field,
+                    async : false,
+                    success : function (data) {
+                        if (data.state){
+                            location.href = context+'/index'
+                        }else {
+                            layer.alert(data.message);
                         }
-                    });
+                    },
+                    error : function (e) {
+                        layer.closeAll('loading');
+                        layer.alert(JSON.stringify(e));
+                    }
                 });
-        });
+            });
     });
 </script>
 <!-- 底部结束 -->

@@ -30,6 +30,12 @@
       <if test="state != null">
         and t.state =  #{state,jdbcType=VARCHAR}
       </if>
+      <if test="inState != null">
+        and t.state IN
+        <foreach collection="inState" item="value" index="index" open="(" close=")" separator=",">
+          #{value,jdbcType=VARCHAR}
+        </foreach>
+      </if>
       <if test="regDate != null">
         and t.reg_date =  #{regDate,jdbcType=TIMESTAMP}
       </if>

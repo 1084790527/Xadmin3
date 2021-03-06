@@ -6,18 +6,28 @@ import java.util.List;
 public class XManagerPojo {
     private String id;
     private String serviceId;
-    private String roleId;
     private String nickname;
     private String mobileNo;
     private String password;
     private Date regDate;
     private String state;
+    private List<String> inState;
     private Date updateDate;
     private Date lastLoginDate;
     private String lastOperId;
     private Date lastOperDate;
     private String lastLoginIp;
     private String defaults;
+
+    public List<String> getInState() {
+        return inState;
+    }
+
+    public XManagerPojo setInState(List<String> inState) {
+        this.inState = inState;
+        return this;
+    }
+
     public String getId() {
         return id;
     }
@@ -31,14 +41,6 @@ public class XManagerPojo {
     }
     public XManagerPojo setServiceId(String serviceId) {
         this.serviceId = serviceId;
-        return this;
-    }
-
-    public String getRoleId() {
-        return roleId;
-    }
-    public XManagerPojo setRoleId(String roleId) {
-        this.roleId = roleId;
         return this;
     }
 

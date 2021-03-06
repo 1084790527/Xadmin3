@@ -5,15 +5,36 @@ import java.util.List;
 
 public class XRolePojo {
     private String id;
+    private List<String> ids;
     private String name;
     private String serviceId;
     private String description;
     private String state;
+    private List<String> inState;
     private String defaults;
     private String creOperId;
     private Date creOperDate;
     private String lastOperId;
     private Date lastOperDate;
+
+    public List<String> getInState() {
+        return inState;
+    }
+
+    public XRolePojo setInState(List<String> inState) {
+        this.inState = inState;
+        return this;
+    }
+
+    public List<String> getIds() {
+        return ids;
+    }
+
+    public XRolePojo setIds(List<String> ids) {
+        this.ids = ids;
+        return this;
+    }
+
     public String getId() {
         return id;
     }

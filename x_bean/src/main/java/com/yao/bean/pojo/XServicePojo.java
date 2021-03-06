@@ -1,5 +1,6 @@
 package com.yao.bean.pojo;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -9,11 +10,22 @@ public class XServicePojo {
     private String realName;
     private String mobileNo;
     private String state;
+    private List<String> inState;
     private Date regDate;
     private String creOperId;
     private Date creOperDate;
     private String lastOperId;
     private Date lastOperDate;
+
+    public List<String> getInState() {
+        return inState;
+    }
+
+    public XServicePojo setInState(List<String> inState) {
+        this.inState = inState;
+        return this;
+    }
+
     public String getId() {
         return id;
     }

@@ -4,7 +4,6 @@
   <resultMap id="BaseResultMap" type="com.yao.bean.pojo.XManagerPojo">
     <id column="id" jdbcType="VARCHAR" property="id" />
     <result column="service_id" jdbcType="VARCHAR" property="serviceId" />
-    <result column="role_id" jdbcType="VARCHAR" property="roleId" />
     <result column="nickname" jdbcType="VARCHAR" property="nickname" />
     <result column="mobile_no" jdbcType="VARCHAR" property="mobileNo" />
     <result column="password" jdbcType="VARCHAR" property="password" />
@@ -25,9 +24,6 @@
       <if test="serviceId != null">
         and t.service_id =  #{serviceId,jdbcType=VARCHAR}
       </if>
-      <if test="roleId != null">
-        and t.role_id =  #{roleId,jdbcType=VARCHAR}
-      </if>
       <if test="nickname != null">
         and t.nickname =  #{nickname,jdbcType=VARCHAR}
       </if>
@@ -42,6 +38,12 @@
       </if>
       <if test="state != null">
         and t.state =  #{state,jdbcType=VARCHAR}
+      </if>
+      <if test="inState != null">
+        and t.state IN
+        <foreach collection="inState" item="value" index="index" open="(" close=")" separator=",">
+          #{value,jdbcType=VARCHAR}
+        </foreach>
       </if>
       <if test="updateDate != null">
         and t.update_date =  #{updateDate,jdbcType=TIMESTAMP}
@@ -75,9 +77,6 @@
       </if>
       <if test="serviceId != null" >
         #{serviceId,jdbcType=VARCHAR},
-      </if>
-      <if test="roleId != null" >
-        #{roleId,jdbcType=VARCHAR},
       </if>
       <if test="nickname != null" >
         #{nickname,jdbcType=VARCHAR},
@@ -123,9 +122,6 @@
       <if test="serviceId != null" >
         service_id,
       </if>
-      <if test="roleId != null" >
-        role_id,
-      </if>
       <if test="nickname != null" >
         nickname,
       </if>
@@ -169,9 +165,6 @@
       </if>
       <if test="serviceId != null" >
         service_id = #{serviceId,jdbcType=VARCHAR},
-      </if>
-      <if test="roleId != null" >
-        role_id = #{roleId,jdbcType=VARCHAR},
       </if>
       <if test="nickname != null" >
         nickname = #{nickname,jdbcType=VARCHAR},
