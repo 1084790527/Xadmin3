@@ -2,6 +2,8 @@ package com.yao.bean.model;
 
 import com.yao.bean.pojo.XServicePojo;
 
+import java.util.List;
+
 /**
  * @author 妖妖
  * @date 11:19 2021/3/5
@@ -12,6 +14,18 @@ public class XServiceModel extends XServicePojo {
 
     private String creOperName;
     private String lastOperName;
+    private String password;
+    private List<String> roleIds;
+    private List<XRoleModel> roles;
+
+    public List<XRoleModel> getRoles() {
+        return roles;
+    }
+
+    public XServiceModel setRoles(List<XRoleModel> roles) {
+        this.roles = roles;
+        return this;
+    }
 
     public XServiceModel() {
     }
@@ -27,6 +41,24 @@ public class XServiceModel extends XServicePojo {
         setCreOperDate(pojo.getCreOperDate());
         setLastOperId(pojo.getLastOperId());
         setLastOperDate(pojo.getLastOperDate());
+    }
+
+    public List<String> getRoleIds() {
+        return roleIds;
+    }
+
+    public XServiceModel setRoleIds(List<String> roleIds) {
+        this.roleIds = roleIds;
+        return this;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public XServiceModel setPassword(String password) {
+        this.password = password;
+        return this;
     }
 
     public String getCreOperName() {

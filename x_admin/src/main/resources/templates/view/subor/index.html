@@ -39,7 +39,7 @@
             <div class="layui-card">
                 <div class="layui-card-body ">
                     <form class="layui-form layui-col-space5">
-                    <a perm="system:subor:addView" onclick="xadmin.open('新增下级',context+'/subor/add',600,400)">
+                    <a perm="system:subor:addView" onclick="xadmin.open('新增下级',context+'/view/subor/add',600,400)">
                         <i class="iconfont">&#xe6b9;</i>新增
                     </a>
                     <div class="layui-inline layui-show-xs-block">
@@ -79,7 +79,7 @@
 {{# if(d.state == '1'){ }}
     <a perm="system:subor:disable" class="layui-btn layui-btn-primary layui-btn-xs" lay-event="disable">停用</a>
     <a perm="system:subor:modifyView" class="layui-btn layui-btn-primary layui-btn-xs"
-       onclick="xadmin.open('修改name','修改url?id={{d.id}}',600,400)">修改
+       onclick="xadmin.open('修改',context+'/view/subor/modify?id={{d.id}}',600,400)">修改
     </a>
 {{# } }}
 {{# if(d.state == '0'){ }}
@@ -103,7 +103,7 @@
             ,toolbar : '#toolbar'
             ,cols: [
                 [
-                    {field:'left', title: '操作',toolbar:"#barBtn",width:400}
+                    {field:'left', title: '操作',toolbar:"#barBtn",width:300}
                     ,{field:'id', title: 'id', sort: true}
                     ,{field:'name', title: '服务商'}
                     ,{field:'realName', title: '真实姓名'}
@@ -146,8 +146,8 @@
             switch (obj.event) {
                 case 'password':
                     $.ajax({
-                        url : '?id='+data.id,
-                        type : '',
+                        url : context+'/subor/resetPass?id='+data.id,
+                        type : 'POST',
                         dataType : 'json',
                         async : false,
                         success : function (data) {
@@ -181,7 +181,7 @@
                 case 'enable':
                     $.ajax({
                         url : context+'/subor?state=1&id='+data.id,
-                        type : '',
+                        type : 'PUT',
                         dataType : 'json',
                         async : false,
                         success : function (data) {
@@ -197,8 +197,8 @@
                     break;
                 case 'delete':
                     $.ajax({
-                        url : '?id='+data.id,
-                        type : '',
+                        url : context+'/subor?id='+data.id,
+                        type : 'DELETE',
                         dataType : 'json',
                         async : false,
                         success : function (data) {

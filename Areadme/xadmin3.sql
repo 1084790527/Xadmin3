@@ -35,6 +35,7 @@ ALTER TABLE x_manager ADD INDEX (mobile_no);
 ALTER TABLE x_manager ADD FULLTEXT (role_id);
 ALTER TABLE x_manager ADD FULLTEXT (state);
 ALTER TABLE x_manager ADD FULLTEXT (service_id);
+ALTER TABLE x_manager ADD login_error VARCHAR(2) COMMENT '登入错误次数';  # 预计统计功能
 
 CREATE TABLE x_manager_role(
   manager_id VARCHAR(20),

@@ -78,7 +78,7 @@ public class AuthorityService {
     }
 
     public List<String> getPriIds(List<String> roleIds){
-        roleIds = xRoleDao.getIdsListByWhere(new XRolePojo().setIds(roleIds).setServiceId(LoginUser.getServiceId()).setState("1"));
+        roleIds = xRoleDao.getIdsListByWhere(new XRolePojo().setIds(roleIds).setState("1"));
         List<String> privilegesIds = xRolePrivilegesDao.getPriIdsListByWhere(new XRolePrivilegesPojo().setRoleIds(roleIds));
         return privilegesIds;
     }

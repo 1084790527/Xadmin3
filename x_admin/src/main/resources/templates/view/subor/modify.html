@@ -51,22 +51,6 @@
                 </div>
             </div>
             <div class="layui-form-item">
-                <label for="password" class="layui-form-label">
-                    <span class="x-red">*</span>登入密码
-                </label>
-                <div class="layui-input-inline">
-                    <input type="password" id="password" name="password" required="" lay-verify="required" autocomplete="off" class="layui-input">
-                </div>
-            </div>
-            <div class="layui-form-item">
-                <label for="passwordEr" class="layui-form-label">
-                    <span class="x-red">*</span>二次验证密码
-                </label>
-                <div class="layui-input-inline">
-                    <input type="password" id="passwordEr" name="passwordEr" required="" lay-verify="required" autocomplete="off" class="layui-input">
-                </div>
-            </div>
-            <div class="layui-form-item">
                 <label class="layui-form-label">
                     <span class="x-red">*</span>角色
                 </label>
@@ -75,29 +59,34 @@
                 </div>
             </div>
             <div class="layui-form-item">
-                <button class="layui-btn" lay-submit="" id="add" lay-filter="add">增加</button>
+                <button class="layui-btn" lay-submit="" id="modify" lay-filter="modify">增加</button>
             </div>
         </form>
     </div>
 </div>
 <script type="text/javascript">
-
+    var id = getQueryVariable("id");
     layui.use(['tree','util','form'], function(){
         var form = layui.form;
         var layer = layui.layer;
         $.ajax({
-            url : context+'/subor/add',
+            url : context+'/subor/modify?id='+id,
             type : 'GET',
             dataType : 'json',
             async : false,
             success : function (res) {
                 if(res.state){
+                    var data = res.data;
                     var html = '';
-                    var roles = res.data;
+                    var roles = data.roles;
                     for (var i = 0; i < roles.length ;i++){
-                        html += '<input type="checkbox" name="roleIds" value="'+roles[i].id+'" title="'+roles[i].name+'">';
+                        if (roles[i].checked)
+                            html += '<input type="checkbox" name="roleIds" value="'+roles[i].id+'" title="'+roles[i].name+'" checked>';
+                        else
+                            html += '<input type="checkbox" name="roleIds" value="'+roles[i].id+'" title="'+roles[i].name+'">';
                     }
                     $('#roleIds').html(html);
+                    form.val('form_data',data);
                     form.render();
                 }else {
                     layer.alert(res.msg);
@@ -107,13 +96,9 @@
             }
         });
 
-        form.on('submit(add)', function(data){
-            if ($('#password').val() != $('#passwordEr').val()){
-                layer.alert('两次输入密码不一致');
-                return;
-            }
+        form.on('submit(modify)', function(data){
             $.ajax({
-                url : context+'/subor/add',
+                url : context+'/subor/modify?id='+id,
                 type : 'POST',
                 dataType : 'json',
                 data : $('#form_data').serialize(),

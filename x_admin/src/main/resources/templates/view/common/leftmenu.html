@@ -8,7 +8,7 @@
     <li>
         {{# if(one.xPrivileges == null || one.xPrivileges.length == 0 ){ }}
     <li>
-        <a onclick="xadmin.add_tab('{{ one.name }}',context+'{{ one.url }}',true)">
+        <a onclick="xadmin.add_tab('{{ one.name }}',context+'{{ one.url }}',false)">
             <i class="iconfont">&#xe6a7;</i>
             <cite>{{ one.name }}</cite></a>
     </li>
@@ -22,7 +22,7 @@
         {{# layui.each(one.xPrivileges,function(index,two){ }}
         <li>
             {{# if(two.xPrivileges == null || two.xPrivileges.length == 0 ){ }}
-            <a onclick="xadmin.add_tab('{{ two.name }}',context+'{{ two.url }}',true)">
+            <a onclick="xadmin.add_tab('{{ two.name }}',context+'{{ two.url }}',false)">
                 <i class="iconfont">&#xe6a7;</i>
                 <cite>{{ two.name }}</cite></a>
             {{# }else{ }}
@@ -35,7 +35,7 @@
                 {{# layui.each(two.xPrivileges,function(index,three){ }}
                 <li>
                     {{# if(three.xPrivileges == null || three.xPrivileges.length == 0 ){ }}
-                    <a onclick="xadmin.add_tab('{{ three.name }}',context+'{{ three.url }}',true)">
+                    <a onclick="xadmin.add_tab('{{ three.name }}',context+'{{ three.url }}',false)">
                         <i class="iconfont">&#xe6a7;</i>
                         <cite>{{ three.name }}</cite></a>
                     {{# }else{ }}
@@ -48,7 +48,7 @@
                         {{# layui.each(three.xPrivileges,function(index,four){ }}
                         <li>
                             {{# if(four.xPrivileges == null || four.xPrivileges.length == 0 ){ }}
-                            <a onclick="xadmin.add_tab('{{ four.name }}',context+'{{ four.url }}',true)">
+                            <a onclick="xadmin.add_tab('{{ four.name }}',context+'{{ four.url }}',false)">
                                 <i class="iconfont">&#xe6a7;</i>
                                 <cite>{{ four.name }}</cite></a>
                             {{# }else{ }}
@@ -61,7 +61,7 @@
                                 {{# layui.each(four.xPrivileges,function(index,five){ }}
                                 <li>
                                     {{# if(five.xPrivileges == null || five.xPrivileges.length == 0 ){ }}
-                                    <a onclick="xadmin.add_tab('{{ five.name }}',context+'{{ five.url }}',true)">
+                                    <a onclick="xadmin.add_tab('{{ five.name }}',context+'{{ five.url }}',false)">
                                         <i class="iconfont">&#xe6a7;</i>
                                         <cite>{{ five.name }}</cite></a>
                                     {{# }else{ }}

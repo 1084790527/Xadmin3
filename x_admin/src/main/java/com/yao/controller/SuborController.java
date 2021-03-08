@@ -11,10 +11,7 @@ import com.yao.service.SuborService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RequestMapping(value = "subor")
 @RestController
@@ -29,14 +26,39 @@ public class SuborController {
         return suborService.suborData(tab);
     }
 
-    @PutMapping
-    public ResObj suborState(XServiceModel model){
-        suborService.suborState(model);
-        return new ResObj().setState(true);
-    }
-
     @GetMapping(value = "add")
     public ResObj addData(){
         return suborService.addData();
+    }
+    @PostMapping(value = "add")
+    public ResObj add(XServiceModel model){
+        suborService.add(model);
+        return new ResObj().setState(true);
+    }
+    @GetMapping(value = "modify")
+    public ResObj modifyData(XServiceModel model){
+        return suborService.modifyData(model);
+    }
+
+    @PostMapping(value = "modify")
+    public ResObj modify(XServiceModel model){
+        suborService.modify(model);
+        return new ResObj().setState(true);
+    }
+    @PutMapping
+    public ResObj upState(XServiceModel model){
+        suborService.upState(model);
+        return new ResObj().setState(true);
+    }
+    @DeleteMapping
+    public ResObj delete(XServiceModel model){
+        model.setState("2");
+        suborService.upState(model);
+        return new ResObj().setState(true);
+    }
+    @PostMapping(value = "resetPass")
+    public ResObj resetPass(XServiceModel model){
+        suborService.resetPass(model);
+        return new ResObj().setState(true);
     }
 }
