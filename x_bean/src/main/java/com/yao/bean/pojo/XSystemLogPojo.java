@@ -1,9 +1,9 @@
 package com.yao.bean.pojo;
 
 import java.util.Date;
-import java.util.List;
 
 public class XSystemLogPojo {
+    private String tableName;
     private String id;
     private String requestUrl;
     private String method;
@@ -13,6 +13,16 @@ public class XSystemLogPojo {
     private Date creDate;
     private String managerId;
     private String type;
+
+    public String getTableName() {
+        return tableName;
+    }
+
+    public XSystemLogPojo setTableName(String tableName) {
+        this.tableName = tableName;
+        return this;
+    }
+
     public String getId() {
         return id;
     }

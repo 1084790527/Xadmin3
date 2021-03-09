@@ -11,7 +11,7 @@ CREATE TABLE x_service(
   last_oper_date DATETIME COMMENT '最后修改操作员时间',
   PRIMARY KEY (id)
 )
-  ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci COMMENT='服务商 数据分离';
+  ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='服务商 数据分离';
 
 CREATE TABLE x_manager(
   id VARCHAR(20),
@@ -30,7 +30,7 @@ CREATE TABLE x_manager(
   defaults varchar(2) COMMENT '1 系统默认管理员不可更改  0 由机构操作员创建的管理员',
   PRIMARY KEY (id)
 )
-  ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci COMMENT='系统管理员';
+  ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='系统管理员';
 ALTER TABLE x_manager ADD INDEX (mobile_no);
 ALTER TABLE x_manager ADD FULLTEXT (role_id);
 ALTER TABLE x_manager ADD FULLTEXT (state);
@@ -44,7 +44,7 @@ CREATE TABLE x_manager_role(
   cre_oper_date DATETIME COMMENT '创建时间',
   PRIMARY KEY (manager_id,role_id)
 )
-  ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci COMMENT='系统管理员-角色';
+  ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='系统管理员-角色';
 CREATE TABLE x_role(
   id VARCHAR(20),
   name VARCHAR(50) COMMENT '角色名称',
@@ -58,7 +58,7 @@ CREATE TABLE x_role(
   last_oper_date DATETIME COMMENT '最后修改时间',
   PRIMARY KEY (id)
 )
-  ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci COMMENT='角色';
+  ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='角色';
 ALTER TABLE x_role ADD FULLTEXT (state);
 ALTER TABLE x_role ADD FULLTEXT (defaults);
 ALTER TABLE x_role ADD FULLTEXT (service_id);
@@ -77,7 +77,7 @@ CREATE TABLE x_privileges(
   state VARCHAR(2) COMMENT '1 启用  0 停用',
   PRIMARY KEY (id)
 )
-  ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci COMMENT='权限';
+  ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='权限';
 ALTER TABLE x_privileges ADD FULLTEXT (parent_id);
 ALTER TABLE x_privileges ADD INDEX (permission);
 ALTER TABLE x_privileges ADD INDEX (url,param);
@@ -90,8 +90,34 @@ CREATE TABLE x_role_privileges(
   cre_oper_date DATETIME COMMENT '最后修改时间',
   PRIMARY KEY (role_id,privileges_id)
 )
-  ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci COMMENT='角色-权限';
+  ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='角色-权限';
 
+CREATE TABLE x_system_log_202103(
+  id VARCHAR(20),
+  request_url VARCHAR(200) COMMENT '请求url',
+  method VARCHAR(10) COMMENT 'url请求方式',
+  ip VARCHAR(80) COMMENT '请求ip',
+  class_method VARCHAR(100) COMMENT '类方法',
+  args VARCHAR(8192) COMMENT '请求参数',
+  cre_date DATETIME COMMENT '请求时间',
+  manager_id VARCHAR(20) COMMENT '操作员id 可能空',
+  type VARCHAR(2) DEFAULT '0' COMMENT '1 登入成功后操作有操作员id  0 还没有登入没有操作员id',
+  PRIMARY KEY (id)
+)
+  ENGINE=MYISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='aop统计日志';
+CREATE TABLE x_system_log_202104(
+  id VARCHAR(20),
+  request_url VARCHAR(200) COMMENT '请求url',
+  method VARCHAR(10) COMMENT 'url请求方式',
+  ip VARCHAR(80) COMMENT '请求ip',
+  class_method VARCHAR(100) COMMENT '类方法',
+  args VARCHAR(8192) COMMENT '请求参数',
+  cre_date DATETIME COMMENT '请求时间',
+  manager_id VARCHAR(20) COMMENT '操作员id 可能空',
+  type VARCHAR(2) DEFAULT '0' COMMENT '1 登入成功后操作有操作员id  0 还没有登入没有操作员id',
+  PRIMARY KEY (id)
+)
+  ENGINE=MYISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='aop统计日志';
 CREATE TABLE x_system_log(
   id VARCHAR(20),
   request_url VARCHAR(200) COMMENT '请求url',
@@ -104,9 +130,12 @@ CREATE TABLE x_system_log(
   type VARCHAR(2) DEFAULT '0' COMMENT '1 登入成功后操作有操作员id  0 还没有登入没有操作员id',
   PRIMARY KEY (id)
 )
-  ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci COMMENT='角色-权限';
+  ENGINE = MERGE UNION = (x_system_log_202103,x_system_log_202104) CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci INSERT_METHOD=LAST;
+
+ALTER TABLE x_system_log ENGINE = MERGE UNION = (x_system_log_202103,x_system_log_202104) CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci INSERT_METHOD=LAST;
 停用  disable
 启用  enable
 删除  delete
   INSERT INTO `xadmin3`.`x_role_privileges`(`role_id`, `privileges_id`) VALUES ('0001', '92121');
-  INSERT INTO `xadmin3`.`x_role_privileges`(`role_id`, `privileges_id`) VALUES ('0001', '92122');
+
+

@@ -16,4 +16,10 @@ public interface XSystemLogDao {
 
     public int deleteRecordByKey(XSystemLogPojo record);
 
+    public List<String> getDbNames(String dbName);
+
+    public int insertTable(String tableName);
+
+    public int updateEngine(String tables);
+
 }

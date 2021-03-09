@@ -4,7 +4,9 @@ package com.yao.controller;
  * @date 17:19 2021/3/2
  */
 
+import com.yao.bean.LoginInfo;
 import com.yao.common.Consts;
+import com.yao.common.util.JwtUtil;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,10 +27,25 @@ public class BaseController {
     private HttpServletRequest request;
     @Autowired
     private HttpSession session;
+    @Autowired
+    private JwtUtil jwtUtil;
 
     @GetMapping
     public String main(){
         return "redirect:/index";
+    }
+    @GetMapping(value = "login")
+    public String login(){
+        Object o = session.getAttribute(Consts.LOGIN_INFO);
+        if (o != null){
+            LoginInfo loginInfo = (LoginInfo) o;
+            try {
+                jwtUtil.parseJWT(loginInfo.getToken());
+                return "redirect:/index";
+            } catch (Exception e) {
+            }
+        }
+        return "login";
     }
 
     /**

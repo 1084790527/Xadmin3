@@ -15,6 +15,9 @@ public class XManagerModel extends XManagerPojo {
     private List<String> roleIds;
     private List<XRoleModel> roles;
 
+    private String oldPwd;
+    private String newPwd;
+
     public XManagerModel() {
 
     }
@@ -32,6 +35,24 @@ public class XManagerModel extends XManagerPojo {
         setLastOperDate(pojo.getLastOperDate());
         setLastLoginIp(pojo.getLastLoginIp());
         setDefaults(pojo.getDefaults());
+    }
+
+    public String getOldPwd() {
+        return oldPwd;
+    }
+
+    public XManagerModel setOldPwd(String oldPwd) {
+        this.oldPwd = oldPwd;
+        return this;
+    }
+
+    public String getNewPwd() {
+        return newPwd;
+    }
+
+    public XManagerModel setNewPwd(String newPwd) {
+        this.newPwd = newPwd;
+        return this;
     }
 
     public List<XRoleModel> getRoles() {

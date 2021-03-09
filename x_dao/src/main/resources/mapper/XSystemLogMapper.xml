@@ -145,10 +145,26 @@
   </sql>
 
     <insert id="insertRecord">
-        INSERT INTO x_system_log <include refid="insertColumns" /> <include refid="insertColumnsVal" />
+        INSERT INTO x_system_log_${tableName} <include refid="insertColumns" /> <include refid="insertColumnsVal" />
     </insert>
 
-    <select id="getRecordByKey" resultMap="BaseResultMap" >
+    <insert id="insertTable">
+        CREATE TABLE ${tableName}(
+          id VARCHAR(20),
+          request_url VARCHAR(200) COMMENT '请求url',
+          method VARCHAR(10) COMMENT 'url请求方式',
+          ip VARCHAR(80) COMMENT '请求ip',
+          class_method VARCHAR(100) COMMENT '类方法',
+          args VARCHAR(8192) COMMENT '请求参数',
+          cre_date DATETIME COMMENT '请求时间',
+          manager_id VARCHAR(20) COMMENT '操作员id 可能空',
+          type VARCHAR(2) DEFAULT '0' COMMENT '1 登入成功后操作有操作员id  0 还没有登入没有操作员id',
+          PRIMARY KEY (id)
+        )
+          ENGINE=MYISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='aop统计日志';
+    </insert>
+
+  <select id="getRecordByKey" resultMap="BaseResultMap" >
         SELECT * FROM x_system_log t <include refid="keyWhere" />
     </select>
 
@@ -160,12 +176,20 @@
         SELECT * FROM x_system_log t <include refid="where" />
     </select>
 
-    <update id="updateRecordByKey">
+    <select id="getDbNames" resultType="java.lang.String">
+        SELECT table_name FROM information_schema.tables where table_schema = #{dbName,jdbcType=VARCHAR};
+    </select>
+
+  <update id="updateRecordByKey">
         UPDATE x_system_log t <include refid="updateColumnVal" /> <include refid="keyWhere" />
     </update>
 
     <update id="deleteRecordByKey">
         DELETE FROM x_system_log WHERE id = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateEngine">
+      ALTER TABLE x_system_log ENGINE=MERGE UNION=(${tables})
     </update>
 
 </mapper>
