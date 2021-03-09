@@ -7,6 +7,7 @@ package com.yao.controller;
 import com.yao.bean.LoginInfo;
 import com.yao.common.Consts;
 import com.yao.common.util.JwtUtil;
+import io.jsonwebtoken.Claims;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,10 +41,12 @@ public class BaseController {
         if (o != null){
             LoginInfo loginInfo = (LoginInfo) o;
             try {
-                jwtUtil.parseJWT(loginInfo.getToken());
-                return "redirect:/index";
+                Claims claims = jwtUtil.parseJWT(loginInfo.getToken());
+                if (claims != null && !claims.getId().equals(loginInfo.getId()))
+                    return "redirect:/index";
             } catch (Exception e) {
             }
+            session.removeAttribute(Consts.LOGIN_INFO);
         }
         return "login";
     }

@@ -13,7 +13,6 @@
         <property name="log.path" value="AAlogs/web" />
     </springProfile>
     <springProfile name="prod">
-        <!--<property name="log.path" value="/home/xAdmin/web/logs" />-->
         <property name="log.path" value="logs" />
     </springProfile>
 
@@ -165,11 +164,7 @@
         第二种就是单独给dao下目录配置debug模式，代码如下，这样配置sql语句会打印，其他还是正常info级别：
         【logging.level.org.mybatis=debug logging.level.dao=debug】
      -->
-    <!--<logger name="com.yao.sys.dao" level="debug" />-->
-    <!--&lt;!&ndash; hibernate logger &ndash;&gt;-->
-    <!--<logger name="com.yao.sys" level="DEBUG,CONSOLE,FILE"/>-->
-    <!--&lt;!&ndash;&lt;!&ndash; Spring framework logger &ndash;&gt;&ndash;&gt;-->
-    <!--<logger name="org.springframework" level="DEBUG,CONSOLE,FILE" additivity="false"></logger>-->
+
     <!--
         root节点是必选节点，用来指定最基础的日志输出级别，只有一个level属性
         level:用来设置打印级别，大小写无关：TRACE, DEBUG, INFO, WARN, ERROR, ALL 和 OFF，
@@ -192,7 +187,7 @@
     <!--4.2 生产环境:输出到文档-->
     <springProfile name="prod">
         <root level="info">
-            <appender-ref ref="CONSOLE" />
+            <!--<appender-ref ref="CONSOLE" />-->
             <!--<appender-ref ref="DEBUG_FILE" />-->
             <appender-ref ref="INFO_FILE" />
             <appender-ref ref="ERROR_FILE" />

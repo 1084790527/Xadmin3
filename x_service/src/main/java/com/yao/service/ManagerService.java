@@ -6,6 +6,7 @@ package com.yao.service;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.yao.bean.LoginInfo;
 import com.yao.bean.model.XManagerModel;
 import com.yao.bean.model.XRoleModel;
 import com.yao.bean.model.tab.XManagerTab;
@@ -54,6 +55,7 @@ public class ManagerService {
         String mobileNo = tab.getMobileNo();
         String state = tab.getState();
         XManagerPojo sel = new XManagerPojo();
+        sel.setServiceId(LoginUser.getServiceId());
         if (StringUtils.isNotBlank(id))
             sel.setId(id);
         if (StringUtils.isNotBlank(nickname))
