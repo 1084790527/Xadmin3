@@ -25,6 +25,28 @@
     <!-- 彩色日志格式 -->
     <property name="CONSOLE_LOG_PATTERN" value="${CONSOLE_LOG_PATTERN:-%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}"/>
 
+    <!-- 单文件日志 -->
+    <!--<appender name="LOG_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">-->
+        <!--<file>${log.path}/log.log</file>-->
+        <!--<encoder>-->
+            <!--<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>-->
+            <!--<charset>UTF-8</charset> &lt;!&ndash; 设置字符集 &ndash;&gt;-->
+        <!--</encoder>-->
+        <!--<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">-->
+            <!--&lt;!&ndash; 日志归档 &ndash;&gt;-->
+            <!--<fileNamePattern>${log.path}/log-%d{yyyy-MM-dd}.%i.log</fileNamePattern>-->
+            <!--<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">-->
+                <!--<maxFileSize>1024MB</maxFileSize>-->
+            <!--</timeBasedFileNamingAndTriggeringPolicy>-->
+            <!--&lt;!&ndash;日志文档保留天数&ndash;&gt;-->
+            <!--<maxHistory>365</maxHistory>-->
+        <!--</rollingPolicy>-->
+        <!--<filter class="ch.qos.logback.classic.filter.ThresholdFilter">-->
+            <!--<level>debug</level>-->
+        <!--</filter>-->
+    <!--</appender>-->
+
+
     <!--1. 输出到控制台-->
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <!--此日志appender是为开发使用，只配置最底级别，控制台输出的日志级别是大于或等于此级别的日志信息-->
@@ -181,17 +203,17 @@
             <appender-ref ref="INFO_FILE" />
             <appender-ref ref="WARN_FILE" />
             <appender-ref ref="ERROR_FILE" />
+            <!--<appender-ref ref="LOG_FILE" />-->
         </root>
     </springProfile>
 
     <!--4.2 生产环境:输出到文档-->
     <springProfile name="prod">
         <root level="info">
-            <!--<appender-ref ref="CONSOLE" />-->
-            <!--<appender-ref ref="DEBUG_FILE" />-->
             <appender-ref ref="INFO_FILE" />
             <appender-ref ref="ERROR_FILE" />
             <appender-ref ref="WARN_FILE" />
+            <!--<appender-ref ref="LOG_FILE" />-->
         </root>
     </springProfile>
 
