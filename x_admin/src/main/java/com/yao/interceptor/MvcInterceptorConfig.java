@@ -7,6 +7,7 @@ package com.yao.interceptor;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -20,9 +21,16 @@ public class MvcInterceptorConfig extends WebMvcConfigurationSupport {
     @Autowired
     private WebInterceptor webInterceptor;
 
+    @Value("${spring.resources.static-locations}")
+    private String staticLocations;
+    @Value("${spring.mvc.static-path-pattern}")
+    private String staticPathPattern;
+
     @Override
     protected void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
+        registry.addResourceHandler(staticPathPattern).addResourceLocations(staticLocations);
+        //addResourceHandler 拦截路径
+        //addResourceLocations  配置系统静态文件路径文件  file:绝对路径   配置系统外的文件
     }
 
     @Override
