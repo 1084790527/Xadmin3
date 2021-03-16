@@ -193,6 +193,6 @@ public class ManagerService {
         String serviceId = LoginUser.getServiceId();
         if (xManagerDao.getRecordByWhere(new XManagerPojo().setId(id).setInState(Arrays.asList(new String[]{"0", "1"})).setServiceId(serviceId)) == null)
             throw new CustException("数据不存在或已删除");
-        xManagerDao.updateRecordByKey(new XManagerPojo().setId(id).setPassword(MD5Util.getMD5Str("qaz123")).setLastOperDate(new Date()).setLastOperId(managerId));
+        xManagerDao.updateRecordByKey(new XManagerPojo().setId(id).setPassword(MD5Util.getMD5Str(model.getPassword())).setLastOperDate(new Date()).setLastOperId(managerId));
     }
 }

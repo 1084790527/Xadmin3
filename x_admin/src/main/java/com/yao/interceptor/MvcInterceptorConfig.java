@@ -49,6 +49,8 @@ public class MvcInterceptorConfig extends WebMvcConfigurationSupport {
                 .excludePathPatterns("/error/**")
                 .excludePathPatterns("/text/api")
                 .excludePathPatterns("/text/api/**")
+                .excludePathPatterns("/api")
+                .excludePathPatterns("/api/**")
                 .excludePathPatterns("/swagger-ui/**")
                 .excludePathPatterns("/swagger-ui")
                 .excludePathPatterns("/swagger/**")

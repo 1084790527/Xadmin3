@@ -84,7 +84,10 @@
     <a perm="system:manager:enable" class="layui-btn layui-btn-primary layui-btn-xs" lay-event="enable">启用</a>
     {{# } }}
     <a perm="system:manager:delete" class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
-    <a perm="system:manager:resetPass" class="layui-btn layui-btn-primary layui-btn-xs" lay-event="password">重置密码</a>
+    <!--<a perm="system:manager:resetPass" class="layui-btn layui-btn-primary layui-btn-xs" lay-event="password">重置密码</a>-->
+    <a perm="system:manager:resetPassView" class="layui-btn layui-btn-primary layui-btn-xs"
+       onclick="xadmin.open('重置密码',context+'/view/manager/resetPass?id={{d.id}}',600,400)">重置密码
+    </a>
 {{# }else{ }}
 <span>机构默认不可修改</span>
 {{# } }}
@@ -145,23 +148,6 @@
         table.on('tool(test)', function(obj) {
             var data = obj.data;
             switch (obj.event) {
-                case 'password':
-                    $.ajax({
-                        url : context+'/manager/resetPass?id='+data.id,
-                        type : 'POST',
-                        dataType : 'json',
-                        async : false,
-                        success : function (data) {
-                            if (data.state){
-                                layer.alert('密码重置成功 qaz123');
-                            }else {
-                                layer.alert(data.msg);
-                            }
-                        },error : function (e) {
-                            layer.alert(JSON.stringify(e));
-                        }
-                    });
-                    break;
                 case 'disable':
                     $.ajax({
                         url : context+'/manager?state=0&id='+data.id,

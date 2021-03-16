@@ -215,6 +215,6 @@ public class SuborService {
         if (service == null)
             throw new CustException("数据不存在或已删除");
         XManagerPojo manager = xManagerDao.getRecordByWhere(new XManagerPojo().setServiceId(service.getId()).setInState(Arrays.asList(new String[]{"1", "0"})).setDefaults("1"));
-        xManagerDao.updateRecordByKey(new XManagerPojo().setId(manager.getId()).setPassword(MD5Util.getMD5Str("qaz123")).setLastOperDate(new Date()).setLastOperId(LoginUser.getId()));
+        xManagerDao.updateRecordByKey(new XManagerPojo().setId(manager.getId()).setPassword(MD5Util.getMD5Str(model.getPassword())).setLastOperDate(new Date()).setLastOperId(LoginUser.getId()));
     }
 }
