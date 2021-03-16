@@ -28,6 +28,9 @@ public class MvcInterceptorConfig extends WebMvcConfigurationSupport {
 
     @Override
     protected void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/swagger-ui/**")
+            .addResourceLocations("classpath:/META-INF/resources/webjars/springfox-swagger-ui/")
+            .resourceChain(false);
         registry.addResourceHandler(staticPathPattern).addResourceLocations(staticLocations);
         //addResourceHandler 拦截路径
         //addResourceLocations  配置系统静态文件路径文件  file:绝对路径   配置系统外的文件
@@ -46,12 +49,18 @@ public class MvcInterceptorConfig extends WebMvcConfigurationSupport {
                 .excludePathPatterns("/error/**")
                 .excludePathPatterns("/text/api")
                 .excludePathPatterns("/text/api/**")
+                .excludePathPatterns("/swagger-ui/**")
+                .excludePathPatterns("/swagger-ui")
+                .excludePathPatterns("/swagger/**")
+                .excludePathPatterns("/swagger-resources/**")
+                .excludePathPatterns("/v3/api-docs")
         ;
         super.addInterceptors(registry);
     }
 
     @Override
     protected void addViewControllers(ViewControllerRegistry registry) {
+        registry.addViewController("/swagger-ui/").setViewName("forward:/swagger-ui/index.html");
         registry.addViewController("/").setViewName("/index");
     }
 }
