@@ -9,7 +9,9 @@
         <module name="x_admin" />
         <module name="x_bean" />
         <module name="x_common" />
+        <module name="x_config" />
         <module name="x_dao" />
+        <module name="x_manage" />
         <module name="x_service" />
       </profile>
     </annotationProcessing>
@@ -18,7 +20,9 @@
       <module name="x_admin" target="1.8" />
       <module name="x_bean" target="1.8" />
       <module name="x_common" target="1.8" />
+      <module name="x_config" target="1.8" />
       <module name="x_dao" target="1.8" />
+      <module name="x_manage" target="1.8" />
       <module name="x_service" target="1.8" />
       <module name="xadmin" target="1.8" />
       <module name="Xadmin3" target="1.8" />

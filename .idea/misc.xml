@@ -9,6 +9,8 @@
         <option value="$PROJECT_DIR$/x_service/pom.xml" />
         <option value="$PROJECT_DIR$/x_bean/pom.xml" />
         <option value="$PROJECT_DIR$/x_dao/pom.xml" />
+        <option value="$PROJECT_DIR$/x_config/pom.xml" />
+        <option value="$PROJECT_DIR$/x_manage/pom.xml" />
       </list>
     </option>
   </component>

@@ -6,7 +6,9 @@
       <module fileurl="file://$PROJECT_DIR$/x_admin/x_admin.iml" filepath="$PROJECT_DIR$/x_admin/x_admin.iml" />
       <module fileurl="file://$PROJECT_DIR$/x_bean/x_bean.iml" filepath="$PROJECT_DIR$/x_bean/x_bean.iml" />
       <module fileurl="file://$PROJECT_DIR$/x_common/x_common.iml" filepath="$PROJECT_DIR$/x_common/x_common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/x_config/x_config.iml" filepath="$PROJECT_DIR$/x_config/x_config.iml" />
       <module fileurl="file://$PROJECT_DIR$/x_dao/x_dao.iml" filepath="$PROJECT_DIR$/x_dao/x_dao.iml" />
+      <module fileurl="file://$PROJECT_DIR$/x_manage/x_manage.iml" filepath="$PROJECT_DIR$/x_manage/x_manage.iml" />
       <module fileurl="file://$PROJECT_DIR$/x_service/x_service.iml" filepath="$PROJECT_DIR$/x_service/x_service.iml" />
     </modules>
   </component>

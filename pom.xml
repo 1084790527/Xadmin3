@@ -17,6 +17,8 @@
 		<module>x_bean</module>
 		<module>x_service</module>
 		<module>x_common</module>
+		<module>x_config</module>
+		<module>x_manage</module>
 		<module>x_admin</module>
 	</modules>
 	<properties>

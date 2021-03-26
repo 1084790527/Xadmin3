@@ -25,6 +25,8 @@
     </content>
     <orderEntry type="jdk" jdkName="1.8" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="x_manage" />
+    <orderEntry type="module" module-name="x_config" />
     <orderEntry type="module" module-name="x_service" />
     <orderEntry type="module" module-name="x_dao" />
     <orderEntry type="module" module-name="x_bean" />
