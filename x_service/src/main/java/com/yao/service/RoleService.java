@@ -57,7 +57,7 @@ public class RoleService {
 
     public ResObj roleData(XRoleTab tab) {
         LoginInfo loginInfo = LoginUser.getLoginInfo();
-        String id = tab.getId();
+        Long id = tab.getId();
         String name = tab.getName();
         String state = tab.getState();
         XRolePojo sel = new XRolePojo();
@@ -66,7 +66,7 @@ public class RoleService {
             sel.setState(state);
         else
             sel.setInState(Arrays.asList(new String[]{"1", "0"}));
-        if (StringUtils.isNotBlank(id))
+        if (id != null)
             sel.setId(id);
         if (StringUtils.isNotBlank(name))
             sel.setName(name);
@@ -79,11 +79,11 @@ public class RoleService {
         List<XRoleModel> models = new ArrayList<>();
         for (XRolePojo pojo : page.getResult()) {
             XRoleModel model = new XRoleModel(pojo);
-            String creOperId = model.getCreOperId();
-            if (StringUtils.isNotBlank(creOperId))
+            Long creOperId = model.getCreOperId();
+            if (creOperId != null)
                 model.setCreOperName(xManagerDao.getRecordByKey(new XManagerPojo().setId(creOperId)).getNickname());
-            String lastOperId = model.getLastOperId();
-            if (StringUtils.isNotBlank(lastOperId))
+            Long lastOperId = model.getLastOperId();
+            if (lastOperId != null)
                 model.setLastOperName(xManagerDao.getRecordByKey(new XManagerPojo().setId(lastOperId)).getNickname());
             models.add(model);
         }
@@ -100,27 +100,27 @@ public class RoleService {
     public void add(XRoleModel model) {
         String description = model.getDescription();
         String name = model.getName();
-        List<String> priIds = model.getPriIds();
+        List<Long> priIds = model.getPriIds();
         if (StringUtils.isBlank(name))
             throw new CustException("角色名称不能空");
         if (StringUtils.isBlank(description))
             throw new CustException("角色描述不能空");
         if (priIds == null || priIds.size() == 0)
             throw new CustException("角色权限至少选择一个");
-        String creOpenId = LoginUser.getId();
-        String serviceId = LoginUser.getServiceId();
+        Long creOpenId = LoginUser.getId();
+        Long serviceId = LoginUser.getServiceId();
 
-        String roleId = idWorker.nextId();
+        Long roleId = idWorker.nextId();
         xRoleDao.insertRecord(new XRolePojo().setId(roleId).setName(name).setServiceId(serviceId)
                 .setDescription(description).setState("1").setDefaults("0").setCreOperId(creOpenId).setCreOperDate(new Date()));
-        for (String priId : priIds) {
+        for (Long priId : priIds) {
             xRolePrivilegesDao.insertRecord(new XRolePrivilegesPojo().setRoleId(roleId).setPrivilegesId(priId).setCreOperId(creOpenId).setCreOperDate(new Date()));
         }
     }
 
     public ResObj modifyData(XRoleModel model) {
-        String id = model.getId();
-        if (StringUtils.isBlank(id))
+        Long id = model.getId();
+        if (id == null)
             throw new CustException("数据异常");
         XRolePojo role = xRoleDao.getRecordByWhere(new XRolePojo().setId(id).setInState(Arrays.asList(new String[]{"1", "0"})).setServiceId(LoginUser.getServiceId()));
         if (role == null)
@@ -130,7 +130,7 @@ public class RoleService {
         List<XPrivilegesPojo> privileges = authorityService.getTreeMenuList(false);
         List<RoleTreeBean> roleTrees = new ArrayList<>();
         authorityService.treePriToRoleBean(roleTrees,privileges);
-        List<String> priIds = authorityService.getPriEndIds(id);
+        List<Long> priIds = authorityService.getPriEndIds(id);
         XRoleModel xRole = new XRoleModel();
         xRole.setName(role.getName());
         xRole.setDescription(role.getDescription());
@@ -140,11 +140,11 @@ public class RoleService {
     }
 
     public void modify(XRoleModel model) {
-        String id = model.getId();
+        Long id = model.getId();
         String name = model.getName();
         String description = model.getDescription();
-        List<String> priIds = model.getPriIds();
-        if (StringUtils.isBlank(id))
+        List<Long> priIds = model.getPriIds();
+        if (id == null)
             throw new CustException("数据异常");
         if (StringUtils.isBlank(name))
             throw new CustException("角色名称不能空");
@@ -152,28 +152,28 @@ public class RoleService {
             throw new CustException("角色描述不能空");
         if (priIds == null || priIds.size() == 0)
             throw new CustException("角色权限至少选择一个");
-        String serviceId = LoginUser.getServiceId();
-        String managerId = LoginUser.getId();
+        Long serviceId = LoginUser.getServiceId();
+        Long managerId = LoginUser.getId();
         XRolePojo role = xRoleDao.getRecordByWhere(new XRolePojo().setId(id).setServiceId(serviceId).setInState(Arrays.asList(new String[]{"1", "0"})).setDefaults("0"));
         if (role == null)
             throw new CustException("角色状态异常");
         xRoleDao.updateRecordByKey(new XRolePojo().setId(id).setName(name).setDescription(description));
         xRolePrivilegesDao.deleteRecordByKey(new XRolePrivilegesPojo().setRoleId(id));
-        for (String priId : priIds) {
+        for (Long priId : priIds) {
             xRolePrivilegesDao.insertRecord(new XRolePrivilegesPojo().setRoleId(id).setPrivilegesId(priId).setCreOperId(managerId).setCreOperDate(new Date()));
         }
 
     }
 
     public void upState(XRoleModel model) {
-        String id = model.getId();
+        Long id = model.getId();
         String state = model.getState();
-        if (StringUtils.isBlank(id))
+        if (id == null)
             throw new CustException("数据异常");
         if (StringUtils.isBlank(state))
             throw new CustException("操作异常");
-        String managerId = LoginUser.getId();
-        String serviceId = LoginUser.getServiceId();
+        Long managerId = LoginUser.getId();
+        Long serviceId = LoginUser.getServiceId();
         if (xRoleDao.getRecordByWhere(new XRolePojo().setId(id).setServiceId(serviceId).setInState(Arrays.asList(new String[]{"1", "0"}))) == null)
             throw new CustException("操作的数据不存在");
         xRoleDao.updateRecordByKey(new XRolePojo().setId(id).setState(state).setLastOperDate(new Date()).setLastOperId(managerId));

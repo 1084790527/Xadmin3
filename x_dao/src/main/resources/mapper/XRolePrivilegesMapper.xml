@@ -10,19 +10,19 @@
   <sql id="where">
     <where>
       <if test="roleId != null">
-        and t.role_id = #{roleId,jdbcType=VARCHAR}
+        and t.role_id = #{roleId,jdbcType=NUMERIC}
       </if>
       <if test="roleIds != null">
         and t.role_id IN
         <foreach collection="roleIds" item="value" index="index" open="(" close=")" separator=",">
-          #{value,jdbcType=VARCHAR}
+          #{value,jdbcType=NUMERIC}
         </foreach>
       </if>
       <if test="privilegesId != null">
-        and t.privileges_id = #{privilegesId,jdbcType=VARCHAR}
+        and t.privileges_id = #{privilegesId,jdbcType=NUMERIC}
       </if>
       <if test="creOperId != null">
-        and t.cre_oper_id = #{creOperId,jdbcType=VARCHAR}
+        and t.cre_oper_id = #{creOperId,jdbcType=NUMERIC}
       </if>
       <if test="creOperDate != null">
         and t.cre_oper_date = #{creOperDate,jdbcType=TIMESTAMP}
@@ -31,20 +31,20 @@
   </sql>
   <sql id="keyWhere">
     <where>
-      and t.role_id = #{roleId,jdbcType=VARCHAR}
-      and t.privileges_id = #{privilegesId,jdbcType=VARCHAR}
+      and t.role_id = #{roleId,jdbcType=NUMERIC}
+      and t.privileges_id = #{privilegesId,jdbcType=NUMERIC}
     </where>
   </sql>
   <sql id="insertColumnsVal">
     <trim prefix="values(" suffix=")" suffixOverrides=",">
       <if test="roleId != null" >
-        #{roleId,jdbcType=VARCHAR},
+        #{roleId,jdbcType=NUMERIC},
       </if>
       <if test="privilegesId != null" >
-        #{privilegesId,jdbcType=VARCHAR},
+        #{privilegesId,jdbcType=NUMERIC},
       </if>
       <if test="creOperId != null" >
-        #{creOperId,jdbcType=VARCHAR},
+        #{creOperId,jdbcType=NUMERIC},
       </if>
       <if test="creOperDate != null" >
         #{creOperDate,jdbcType=TIMESTAMP},
@@ -72,13 +72,13 @@
   <sql id="updateColumnVal">
     <set>
       <if test="roleId != null" >
-        role_id = #{roleId,jdbcType=VARCHAR},
+        role_id = #{roleId,jdbcType=NUMERIC},
       </if>
       <if test="privilegesId != null" >
-        privileges_id = #{privilegesId,jdbcType=VARCHAR},
+        privileges_id = #{privilegesId,jdbcType=NUMERIC},
       </if>
       <if test="creOperId != null" >
-        cre_oper_id = #{creOperId,jdbcType=VARCHAR},
+        cre_oper_id = #{creOperId,jdbcType=NUMERIC},
       </if>
       <if test="creOperDate != null" >
         cre_oper_date = #{creOperDate,jdbcType=TIMESTAMP},
@@ -101,7 +101,7 @@
     <select id="getRecordListByWhere" resultMap="BaseResultMap" >
         SELECT * FROM x_role_privileges t <include refid="where" />
     </select>
-    <select id="getPriIdsListByWhere" resultType="java.lang.String">
+    <select id="getPriIdsListByWhere" resultType="java.lang.Long">
         SELECT t.privileges_id AS privilegesId FROM x_role_privileges t <include refid="where" />
     </select>
 
@@ -116,7 +116,7 @@
             and role_id = #{roleId,jdbcType=VARCHAR}
           </if>
           <if test="privilegesId != null">
-            and privileges_id = #{privilegesId,jdbcType=VARCHAR}
+            and privileges_id = #{privilegesId,jdbcType=NUMERIC}
           </if>
         </where>
     </update>

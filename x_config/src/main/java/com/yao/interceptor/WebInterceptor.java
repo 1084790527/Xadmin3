@@ -56,7 +56,7 @@ public class WebInterceptor implements HandlerInterceptor {
             }
             LoginInfo info = (LoginInfo) o;
             Claims claims = jwtUtil.parseJWT(info.getToken());
-            if (claims == null || !claims.getId().equals(info.getId())){
+            if (claims == null || !claims.getId().equals(info.getId()+"")){
                 response.sendRedirect(request.getScheme()+"://"+request.getServerName()+"/"+request.getContextPath()+"/login");
                 return false;
             }

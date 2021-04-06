@@ -41,7 +41,7 @@ public class BaseController {
             LoginInfo loginInfo = (LoginInfo) o;
             try {
                 Claims claims = jwtUtil.parseJWT(loginInfo.getToken());
-                if (claims != null && !claims.getId().equals(loginInfo.getId()))
+                if (claims != null && !claims.getId().equals(loginInfo.getId()+""))
                     return "redirect:/index";
             } catch (Exception e) {
             }

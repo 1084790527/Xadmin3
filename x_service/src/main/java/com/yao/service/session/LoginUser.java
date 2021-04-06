@@ -25,7 +25,7 @@ public class LoginUser {
         return loginInfo;
     }
 
-    public static String getId(){
+    public static Long getId(){
         return getLoginInfo().getId();
     }
 
@@ -57,7 +57,7 @@ public class LoginUser {
         return getLoginInfo().getDefaults();
     }
 
-    public static String getServiceId() {
+    public static Long getServiceId() {
         return getLoginInfo().getServiceId();
     }
 }

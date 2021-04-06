@@ -10,22 +10,22 @@ import java.util.Date;
 
 
 public class LoginInfo implements Serializable {
-    private String id;
+    private Long id;
     private String nickname;
     private String mobileNo;
     private String email;
     private String ip;
     private Date loginDate;
     private String token;
-    private String roleId;
+    private Long roleId;
     private String defaults;
-    private String serviceId;
+    private Long serviceId;
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -77,11 +77,11 @@ public class LoginInfo implements Serializable {
         this.token = token;
     }
 
-    public String getRoleId() {
+    public Long getRoleId() {
         return roleId;
     }
 
-    public void setRoleId(String roleId) {
+    public void setRoleId(Long roleId) {
         this.roleId = roleId;
     }
 
@@ -93,11 +93,11 @@ public class LoginInfo implements Serializable {
         this.defaults = defaults;
     }
 
-    public String getServiceId() {
+    public Long getServiceId() {
         return serviceId;
     }
 
-    public void setServiceId(String serviceId) {
+    public void setServiceId(Long serviceId) {
         this.serviceId = serviceId;
     }
 }

@@ -4,41 +4,41 @@ import java.util.Date;
 import java.util.List;
 
 public class XRolePrivilegesPojo {
-    private String roleId;
-    private List<String> roleIds;
-    private String privilegesId;
-    private String creOperId;
+    private Long roleId;
+    private List<Long> roleIds;
+    private Long privilegesId;
+    private Long creOperId;
     private Date creOperDate;
 
-    public List<String> getRoleIds() {
+    public List<Long> getRoleIds() {
         return roleIds;
     }
 
-    public XRolePrivilegesPojo setRoleIds(List<String> roleIds) {
+    public XRolePrivilegesPojo setRoleIds(List<Long> roleIds) {
         this.roleIds = roleIds;
         return this;
     }
 
-    public String getRoleId() {
+    public Long getRoleId() {
         return roleId;
     }
-    public XRolePrivilegesPojo setRoleId(String roleId) {
+    public XRolePrivilegesPojo setRoleId(Long roleId) {
         this.roleId = roleId;
         return this;
     }
 
-    public String getPrivilegesId() {
+    public Long getPrivilegesId() {
         return privilegesId;
     }
-    public XRolePrivilegesPojo setPrivilegesId(String privilegesId) {
+    public XRolePrivilegesPojo setPrivilegesId(Long privilegesId) {
         this.privilegesId = privilegesId;
         return this;
     }
 
-    public String getCreOperId() {
+    public Long getCreOperId() {
         return creOperId;
     }
-    public XRolePrivilegesPojo setCreOperId(String creOperId) {
+    public XRolePrivilegesPojo setCreOperId(Long creOperId) {
         this.creOperId = creOperId;
         return this;
     }

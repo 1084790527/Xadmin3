@@ -14,7 +14,7 @@ public class XRoleModel extends XRolePojo {
 
     private String creOperName;
     private String lastOperName;
-    private List<String> priIds;
+    private List<Long> priIds;
     private List<RoleTreeBean> roleTrees;
     private Boolean checked;
 
@@ -52,11 +52,11 @@ public class XRoleModel extends XRolePojo {
         return this;
     }
 
-    public List<String> getPriIds() {
+    public List<Long> getPriIds() {
         return priIds;
     }
 
-    public XRoleModel setPriIds(List<String> priIds) {
+    public XRoleModel setPriIds(List<Long> priIds) {
         this.priIds = priIds;
         return this;
     }

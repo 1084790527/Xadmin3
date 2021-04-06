@@ -1,7 +1,7 @@
 package com.yao.controller;
 /**
  * @author 妖妖
- * @date 16:34 2021/3/3
+ * @date 9:03 2021/4/6
  */
 
 import com.yao.bean.vo.ResObj;
@@ -29,7 +29,7 @@ public class ControllerEHA {
         }
         if (e instanceof CustException){
             log.error("代码98：" + e.getMessage(), e);
-            return new ResObj().setState(false).setCount(0L).setCode(98).setMsg("请求异常 -->> "+e.getMessage());
+            return new ResObj().setState(false).setCount(0L).setCode(98).setMsg("| "+e.getMessage()+" |");
         }else if (e instanceof NullPointerException) {
             log.error("代码00：" + e.getMessage(), e);
             return new ResObj().setState(false).setCount(0L).setCode(0).setMsg("发生空指针异常 -->> "+e.getMessage());
@@ -44,4 +44,5 @@ public class ControllerEHA {
             return new ResObj().setState(false).setCount(0L).setCode(99).setMsg("服务器代码发生异常,请联系管理员 -->> "+e.getMessage());
         }
     }
+
 }

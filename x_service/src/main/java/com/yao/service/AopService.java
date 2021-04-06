@@ -91,13 +91,13 @@ public class AopService {
     }
 
     public ResObj journalData(XSystemLogTab tab) {
-        String id = tab.getId();
+        Long id = tab.getId();
         String requestUrl = tab.getRequestUrl();
         String method = tab.getMethod();
         String ip = tab.getIp();
-        String managerId = tab.getManagerId();
+        Long managerId = tab.getManagerId();
         XSystemLogPojo sel = new XSystemLogPojo();
-        if (StringUtils.isNotBlank(id))
+        if (id != null)
             sel.setId(id);
         if (StringUtils.isNotBlank(requestUrl))
             sel.setRequestUrl(requestUrl);
@@ -105,7 +105,7 @@ public class AopService {
             sel.setMethod(method);
         if (StringUtils.isNotBlank(ip))
             sel.setIp(ip);
-        if (StringUtils.isNotBlank(managerId))
+        if (managerId != null)
             sel.setManagerId(managerId);
         if (StringUtils.isNotBlank(tab.getOrder()))
             PageHelper.orderBy(Tool.humpToLine(tab.getSort().replaceAll("Name","Id"))+" "+tab.getOrder());
@@ -116,7 +116,7 @@ public class AopService {
         List<XSystemLogModel> models = new ArrayList<>();
         for (XSystemLogPojo pojo : page.getResult()) {
             XSystemLogModel model = new XSystemLogModel(pojo);
-            if (StringUtils.isNotBlank(model.getManagerId()))
+            if (model.getManagerId() != null)
                 model.setManagerName(xManagerDao.getRecordByKey(new XManagerPojo().setId(model.getManagerId())).getNickname());
             models.add(model);
         }

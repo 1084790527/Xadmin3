@@ -2,21 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yao.dao.XServiceDao">
   <resultMap id="BaseResultMap" type="com.yao.bean.pojo.XServicePojo">
-    <id column="id" jdbcType="VARCHAR" property="id" />
+    <id column="id" jdbcType="NUMERIC" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="real_name" jdbcType="VARCHAR" property="realName" />
     <result column="mobile_no" jdbcType="VARCHAR" property="mobileNo" />
     <result column="state" jdbcType="VARCHAR" property="state" />
     <result column="reg_date" jdbcType="TIMESTAMP" property="regDate" />
-    <result column="cre_oper_id" jdbcType="VARCHAR" property="creOperId" />
+    <result column="cre_oper_id" jdbcType="NUMERIC" property="creOperId" />
     <result column="cre_oper_date" jdbcType="TIMESTAMP" property="creOperDate" />
-    <result column="last_oper_id" jdbcType="VARCHAR" property="lastOperId" />
+    <result column="last_oper_id" jdbcType="NUMERIC" property="lastOperId" />
     <result column="last_oper_date" jdbcType="TIMESTAMP" property="lastOperDate" />
   </resultMap>
   <sql id="where">
     <where>
       <if test="id != null">
-        and t.id =  #{id,jdbcType=VARCHAR}
+        and t.id =  #{id,jdbcType=NUMERIC}
       </if>
       <if test="name != null">
         and t.name =  #{name,jdbcType=VARCHAR}
@@ -40,13 +40,13 @@
         and t.reg_date =  #{regDate,jdbcType=TIMESTAMP}
       </if>
       <if test="creOperId != null">
-        and t.cre_oper_id =  #{creOperId,jdbcType=VARCHAR}
+        and t.cre_oper_id =  #{creOperId,jdbcType=NUMERIC}
       </if>
       <if test="creOperDate != null">
         and t.cre_oper_date =  #{creOperDate,jdbcType=TIMESTAMP}
       </if>
       <if test="lastOperId != null">
-        and t.last_oper_id =  #{lastOperId,jdbcType=VARCHAR}
+        and t.last_oper_id =  #{lastOperId,jdbcType=NUMERIC}
       </if>
       <if test="lastOperDate != null">
         and t.last_oper_date =  #{lastOperDate,jdbcType=TIMESTAMP}
@@ -55,13 +55,13 @@
   </sql>
   <sql id="keyWhere">
     <where>
-      and t.id =  #{id,jdbcType=VARCHAR}
+      and t.id =  #{id,jdbcType=NUMERIC}
     </where>
   </sql>
   <sql id="insertColumnsVal">
     <trim prefix="values(" suffix=")" suffixOverrides=",">
       <if test="id != null" >
-        #{id,jdbcType=VARCHAR},
+        #{id,jdbcType=NUMERIC},
       </if>
       <if test="name != null" >
         #{name,jdbcType=VARCHAR},
@@ -79,13 +79,13 @@
         #{regDate,jdbcType=TIMESTAMP},
       </if>
       <if test="creOperId != null" >
-        #{creOperId,jdbcType=VARCHAR},
+        #{creOperId,jdbcType=NUMERIC},
       </if>
       <if test="creOperDate != null" >
         #{creOperDate,jdbcType=TIMESTAMP},
       </if>
       <if test="lastOperId != null" >
-        #{lastOperId,jdbcType=VARCHAR},
+        #{lastOperId,jdbcType=NUMERIC},
       </if>
       <if test="lastOperDate != null" >
         #{lastOperDate,jdbcType=TIMESTAMP},
@@ -131,7 +131,7 @@
   <sql id="updateColumnVal">
     <set>
       <if test="id != null" >
-        id = #{id,jdbcType=VARCHAR},
+        id = #{id,jdbcType=NUMERIC},
       </if>
       <if test="name != null" >
         name = #{name,jdbcType=VARCHAR},
@@ -149,13 +149,13 @@
         reg_date = #{regDate,jdbcType=TIMESTAMP},
       </if>
       <if test="creOperId != null" >
-        cre_oper_id = #{creOperId,jdbcType=VARCHAR},
+        cre_oper_id = #{creOperId,jdbcType=NUMERIC},
       </if>
       <if test="creOperDate != null" >
         cre_oper_date = #{creOperDate,jdbcType=TIMESTAMP},
       </if>
       <if test="lastOperId != null" >
-        last_oper_id = #{lastOperId,jdbcType=VARCHAR},
+        last_oper_id = #{lastOperId,jdbcType=NUMERIC},
       </if>
       <if test="lastOperDate != null" >
         last_oper_date = #{lastOperDate,jdbcType=TIMESTAMP},
@@ -184,7 +184,7 @@
     </update>
 
     <update id="deleteRecordByKey">
-        DELETE FROM x_service WHERE id = #{id,jdbcType=VARCHAR}
+        DELETE FROM x_service WHERE id = #{id,jdbcType=NUMERIC}
     </update>
 
 </mapper>

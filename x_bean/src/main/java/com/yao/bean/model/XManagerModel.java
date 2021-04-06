@@ -12,7 +12,7 @@ import java.util.List;
 public class XManagerModel extends XManagerPojo {
 
     private String lastOperName;
-    private List<String> roleIds;
+    private List<Long> roleIds;
     private List<XRoleModel> roles;
 
     private String oldPwd;
@@ -64,11 +64,11 @@ public class XManagerModel extends XManagerPojo {
         return this;
     }
 
-    public List<String> getRoleIds() {
+    public List<Long> getRoleIds() {
         return roleIds;
     }
 
-    public XManagerModel setRoleIds(List<String> roleIds) {
+    public XManagerModel setRoleIds(List<Long> roleIds) {
         this.roleIds = roleIds;
         return this;
     }

@@ -5,18 +5,18 @@ package com.yao.bean.vo;
  */
 
 public class ResObj {
-    private String id;
+    private Long id;
     private boolean state;
     private int code;
     private String msg;
     private Long count;
     private Object data;
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public ResObj setId(String id) {
+    public ResObj setId(Long id) {
         this.id = id;
         return this;
     }

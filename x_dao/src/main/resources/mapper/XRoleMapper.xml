@@ -2,33 +2,33 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yao.dao.XRoleDao">
   <resultMap id="BaseResultMap" type="com.yao.bean.pojo.XRolePojo">
-    <id column="id" jdbcType="VARCHAR" property="id" />
+    <id column="id" jdbcType="NUMERIC" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="service_id" jdbcType="VARCHAR" property="serviceId" />
+    <result column="service_id" jdbcType="NUMERIC" property="serviceId" />
     <result column="description" jdbcType="VARCHAR" property="description" />
     <result column="state" jdbcType="VARCHAR" property="state" />
     <result column="defaults" jdbcType="VARCHAR" property="defaults" />
-    <result column="cre_oper_id" jdbcType="VARCHAR" property="creOperId" />
+    <result column="cre_oper_id" jdbcType="NUMERIC" property="creOperId" />
     <result column="cre_oper_date" jdbcType="TIMESTAMP" property="creOperDate" />
-    <result column="last_oper_id" jdbcType="VARCHAR" property="lastOperId" />
+    <result column="last_oper_id" jdbcType="NUMERIC" property="lastOperId" />
     <result column="last_oper_date" jdbcType="TIMESTAMP" property="lastOperDate" />
   </resultMap>
   <sql id="where">
     <where>
       <if test="id != null">
-        and t.id =  #{id,jdbcType=VARCHAR}
+        and t.id =  #{id,jdbcType=NUMERIC}
       </if>
       <if test="ids != null">
         and t.id IN
         <foreach collection="ids" item="value" index="index" open="(" close=")" separator=",">
-          #{value,jdbcType=VARCHAR}
+          #{value,jdbcType=NUMERIC}
         </foreach>
       </if>
       <if test="name != null">
         and t.name =  #{name,jdbcType=VARCHAR}
       </if>
       <if test="serviceId != null">
-        and t.service_id =  #{serviceId,jdbcType=VARCHAR}
+        and t.service_id =  #{serviceId,jdbcType=NUMERIC}
       </if>
       <if test="description != null">
         and t.description =  #{description,jdbcType=VARCHAR}
@@ -46,13 +46,13 @@
         and t.defaults =  #{defaults,jdbcType=VARCHAR}
       </if>
       <if test="creOperId != null">
-        and t.cre_oper_id =  #{creOperId,jdbcType=VARCHAR}
+        and t.cre_oper_id =  #{creOperId,jdbcType=NUMERIC}
       </if>
       <if test="creOperDate != null">
         and t.cre_oper_date =  #{creOperDate,jdbcType=TIMESTAMP}
       </if>
       <if test="lastOperId != null">
-        and t.last_oper_id =  #{lastOperId,jdbcType=VARCHAR}
+        and t.last_oper_id =  #{lastOperId,jdbcType=NUMERIC}
       </if>
       <if test="lastOperDate != null">
         and t.last_oper_date =  #{lastOperDate,jdbcType=TIMESTAMP}
@@ -67,13 +67,13 @@
   <sql id="insertColumnsVal">
     <trim prefix="values(" suffix=")" suffixOverrides=",">
       <if test="id != null" >
-        #{id,jdbcType=VARCHAR},
+        #{id,jdbcType=NUMERIC},
       </if>
       <if test="name != null" >
         #{name,jdbcType=VARCHAR},
       </if>
       <if test="serviceId != null" >
-        #{serviceId,jdbcType=VARCHAR},
+        #{serviceId,jdbcType=NUMERIC},
       </if>
       <if test="description != null" >
         #{description,jdbcType=VARCHAR},
@@ -85,13 +85,13 @@
         #{defaults,jdbcType=VARCHAR},
       </if>
       <if test="creOperId != null" >
-        #{creOperId,jdbcType=VARCHAR},
+        #{creOperId,jdbcType=NUMERIC},
       </if>
       <if test="creOperDate != null" >
         #{creOperDate,jdbcType=TIMESTAMP},
       </if>
       <if test="lastOperId != null" >
-        #{lastOperId,jdbcType=VARCHAR},
+        #{lastOperId,jdbcType=NUMERIC},
       </if>
       <if test="lastOperDate != null" >
         #{lastOperDate,jdbcType=TIMESTAMP},
@@ -137,13 +137,13 @@
   <sql id="updateColumnVal">
     <set>
       <if test="id != null" >
-        id = #{id,jdbcType=VARCHAR},
+        id = #{id,jdbcType=NUMERIC},
       </if>
       <if test="name != null" >
         name = #{name,jdbcType=VARCHAR},
       </if>
       <if test="serviceId != null" >
-        service_id = #{serviceId,jdbcType=VARCHAR},
+        service_id = #{serviceId,jdbcType=NUMERIC},
       </if>
       <if test="description != null" >
         description = #{description,jdbcType=VARCHAR},
@@ -155,13 +155,13 @@
         defaults = #{defaults,jdbcType=VARCHAR},
       </if>
       <if test="creOperId != null" >
-        cre_oper_id = #{creOperId,jdbcType=VARCHAR},
+        cre_oper_id = #{creOperId,jdbcType=NUMERIC},
       </if>
       <if test="creOperDate != null" >
         cre_oper_date = #{creOperDate,jdbcType=TIMESTAMP},
       </if>
       <if test="lastOperId != null" >
-        last_oper_id = #{lastOperId,jdbcType=VARCHAR},
+        last_oper_id = #{lastOperId,jdbcType=NUMERIC},
       </if>
       <if test="lastOperDate != null" >
         last_oper_date = #{lastOperDate,jdbcType=TIMESTAMP},
@@ -184,7 +184,7 @@
     <select id="getRecordListByWhere" resultMap="BaseResultMap" >
         SELECT * FROM x_role t <include refid="where" />
     </select>
-    <select id="getIdsListByWhere" resultType="java.lang.String">
+    <select id="getIdsListByWhere" resultType="java.lang.Long">
       SELECT t.id AS id FROM x_role t <include refid="where" />
     </select>
 
@@ -193,7 +193,7 @@
     </update>
 
     <update id="deleteRecordByKey">
-        DELETE FROM x_role WHERE id = #{id,jdbcType=VARCHAR}
+        DELETE FROM x_role WHERE id = #{id,jdbcType=NUMERIC}
     </update>
 
 </mapper>

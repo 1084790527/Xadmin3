@@ -53,7 +53,7 @@ public class SuborService {
 
 
     public ResObj suborData(XServiceTab tab) {
-        String id = tab.getId();
+        Long id = tab.getId();
         String name = tab.getName();
         String realName = tab.getRealName();
         String mobileNo = tab.getMobileNo();
@@ -63,7 +63,7 @@ public class SuborService {
             sel.setInState(Arrays.asList(new String[]{"1", "0"}));
         else
             sel.setState(state);
-        if (StringUtils.isNotBlank(id))
+        if (id != null)
             sel.setId(id);
         if (StringUtils.isNotBlank(name))
             sel.setName(name);
@@ -81,12 +81,12 @@ public class SuborService {
         List<XServiceModel> models = new ArrayList<>();
         for (XServicePojo pojo : page.getResult()) {
             XServiceModel model = new XServiceModel(pojo);
-            String creOperId = model.getCreOperId();
-            String lastOperId = model.getLastOperId();
-            if (StringUtils.isNotBlank(creOperId)){
+            Long creOperId = model.getCreOperId();
+            Long lastOperId = model.getLastOperId();
+            if (creOperId != null){
                 model.setCreOperName(xManagerDao.getRecordByKey(new XManagerPojo().setId(creOperId)).getNickname());
             }
-            if (StringUtils.isNotBlank(lastOperId)){
+            if (lastOperId != null){
                 model.setLastOperName(xManagerDao.getRecordByKey(new XManagerPojo().setId(lastOperId)).getNickname());
             }
             models.add(model);
@@ -95,7 +95,7 @@ public class SuborService {
     }
 
     public ResObj addData() {
-        String serviceId = LoginUser.getServiceId();
+        Long serviceId = LoginUser.getServiceId();
         List<XRolePojo> roles = xRoleDao.getRecordListByWhere(new XRolePojo().setServiceId(serviceId).setState("1"));
         List<XRoleModel> models = new ArrayList<>();
         for (XRolePojo role : roles) {
@@ -109,7 +109,7 @@ public class SuborService {
         String realName = model.getRealName();
         String mobileNo = model.getMobileNo();
         String password = model.getPassword();
-        List<String> roleIds = model.getRoleIds();
+        List<Long> roleIds = model.getRoleIds();
         if (StringUtils.isBlank(name))
             throw new CustException("名称不能空");
         if (StringUtils.isBlank(realName))
@@ -120,36 +120,36 @@ public class SuborService {
             throw new CustException("密码不能空并且长度不能小于6");
         if (roleIds == null || roleIds.size() == 0)
             throw new CustException("角色至少选择一个");
-        String serviceId = LoginUser.getServiceId();
-        String managerId = LoginUser.getId();
-        for (String roleId : roleIds) {
+        Long serviceId = LoginUser.getServiceId();
+        Long managerId = LoginUser.getId();
+        for (Long roleId : roleIds) {
             if (xRoleDao.getRecordByWhere(new XRolePojo().setId(roleId).setState("1").setServiceId(serviceId)) == null)
                 throw new CustException("角色不存在或已删除");
         }
-        String sid = idWorker.nextId();
-        String mid = idWorker.nextId();
+        Long sid = idWorker.nextId();
+        Long mid = idWorker.nextId();
         xServiceDao.insertRecord(new XServicePojo().setId(sid).setName(name).setRealName(realName)
                 .setMobileNo(mobileNo).setState("1").setRegDate(new Date()).setCreOperId(managerId).setCreOperDate(new Date()));
         xManagerDao.insertRecord(new XManagerPojo().setId(mid).setServiceId(sid).setNickname(name)
                 .setMobileNo(mobileNo).setPassword(MD5Util.getMD5Str(password)).setRegDate(new Date())
                 .setState("1").setDefaults("1"));
-        for (String roleId : roleIds) {
+        for (Long roleId : roleIds) {
             xManagerRoleDao.insertRecord(new XManagerRolePojo().setManagerId(mid).setRoleId(roleId).setCreOperId(managerId).setCreOperDate(new Date()));
         }
     }
 
     public ResObj modifyData(XServiceModel model) {
-        String id = model.getId();
-        if (StringUtils.isBlank(id))
+        Long id = model.getId();
+        if (id != null)
             throw new CustException("参数异常");
         XServicePojo service = xServiceDao.getRecordByWhere(new XServicePojo().setId(id).setInState(Arrays.asList(new String[]{"1", "0"})));
         if (service == null)
             throw new CustException("数据不存在或已删除");
         XServiceModel serviceModel = new XServiceModel(service);
 
-        List<String> roleIds = xManagerRoleDao.getRoleIdListByWhere(new XManagerRolePojo().setManagerId(xManagerDao.getRecordByWhere(new XManagerPojo().setDefaults("1").setServiceId(id)).getId()));
+        List<Long> roleIds = xManagerRoleDao.getRoleIdListByWhere(new XManagerRolePojo().setManagerId(xManagerDao.getRecordByWhere(new XManagerPojo().setDefaults("1").setServiceId(id)).getId()));
 
-        String serviceId = LoginUser.getServiceId();
+        Long serviceId = LoginUser.getServiceId();
         List<XRolePojo> roles = xRoleDao.getRecordListByWhere(new XRolePojo().setServiceId(serviceId).setState("1"));
         List<XRoleModel> models = new ArrayList<>();
         for (XRolePojo role : roles) {
@@ -164,13 +164,13 @@ public class SuborService {
     }
 
     public void modify(XServiceModel model) {
-        String id = model.getId();
+        Long id = model.getId();
         String name = model.getName();
         String realName = model.getRealName();
         String mobileNo = model.getMobileNo();
-        List<String> roleIds = model.getRoleIds();
+        List<Long> roleIds = model.getRoleIds();
 
-        if (StringUtils.isBlank(id))
+        if (id != null)
             throw new CustException("参数异常");
         if (StringUtils.isBlank(name))
             throw new CustException("服务商名称不能空");
@@ -185,18 +185,18 @@ public class SuborService {
             throw new CustException("修改的数据不存在或已删除");
         }
         xServiceDao.updateRecordByKey(new XServicePojo().setId(id).setName(name).setRealName(realName).setMobileNo(mobileNo).setLastOperId(LoginUser.getId()).setLastOperDate(new Date()));
-        String mId = xManagerDao.getRecordByWhere(new XManagerPojo().setServiceId(id).setDefaults("1")).getId();
+        Long mId = xManagerDao.getRecordByWhere(new XManagerPojo().setServiceId(id).setDefaults("1")).getId();
         xManagerRoleDao.deleteRecordByKey(new XManagerRolePojo().setManagerId(mId));
-        for (String roleId : roleIds) {
+        for (Long roleId : roleIds) {
             xManagerRoleDao.insertRecord(new XManagerRolePojo().setManagerId(mId).setRoleId(roleId).setCreOperDate(new Date()).setCreOperId(LoginUser.getId()));
         }
 
     }
 
     public void upState(XServiceModel model) {
-        String id = model.getId();
+        Long id = model.getId();
         String state = model.getState();
-        if (StringUtils.isBlank(id))
+        if (id == null)
             throw new CustException("数据异常");
         if (StringUtils.isBlank(state))
             throw new CustException("参数异常");
@@ -208,8 +208,8 @@ public class SuborService {
     }
 
     public void resetPass(XServiceModel model) {
-        String id = model.getId();
-        if (StringUtils.isBlank(id))
+        Long id = model.getId();
+        if (id == null)
             throw new CustException("数据异常");
         XServicePojo service = xServiceDao.getRecordByWhere(new XServicePojo().setId(id).setInState(Arrays.asList(new String[]{"1", "0"})));
         if (service == null)

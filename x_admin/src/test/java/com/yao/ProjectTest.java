@@ -50,9 +50,9 @@ public class ProjectTest {
     @Test
     public void t1(){
         log.info("------------------------");
-        String id = idWorker.nextId();
+        Long id = idWorker.nextId();
         log.info(id);
-        log.info(id.length());
+//        log.info(id.length());
         log.info("------------------------");
     }
 
@@ -64,8 +64,8 @@ public class ProjectTest {
         log.info("------------------------");
         xServiceDao.getRecordListByWhere(new XServicePojo());
         log.info("------------------------");
-        log.info(JSON.toJSONString(xManagerRoleDao.getRoleIdListByWhere(new XManagerRolePojo().setManagerId("2221"))));
-        log.info(JSON.toJSONString(xRolePrivilegesDao.getPriIdsListByWhere(new XRolePrivilegesPojo().setRoleIds(Arrays.asList(new String[]{"0001"})))));
+        log.info(JSON.toJSONString(xManagerRoleDao.getRoleIdListByWhere(new XManagerRolePojo().setManagerId(2221L))));
+        log.info(JSON.toJSONString(xRolePrivilegesDao.getPriIdsListByWhere(new XRolePrivilegesPojo().setRoleIds(Arrays.asList(new Long[]{0001L})))));
     }
 
     /**
@@ -74,11 +74,11 @@ public class ProjectTest {
     @Test
     public void t3(){
         log.info("------------------------");
-        String id = idWorker.nextId();
+        Long id = idWorker.nextId();
         Map<String,Object> args = new HashMap<>();
         args.put("yy","uu");
         args.put("xx","cc");
-        String token = jwtUtil.createJWT(id,"",args);
+        String token = jwtUtil.createJWT(id+"","",args);
         log.info("token: "+token);
         Claims claims = jwtUtil.parseJWT(token);
         log.info(claims.get("yy"));
@@ -101,7 +101,7 @@ public class ProjectTest {
     @Test
     public void t4(){
         log.info("------------------------------");
-        List<String> priIds = xRolePrivilegesDao.getPriIdsListByWhere(new XRolePrivilegesPojo().setRoleIds(Arrays.asList(new String[]{"0001"})));
+        List<Long> priIds = xRolePrivilegesDao.getPriIdsListByWhere(new XRolePrivilegesPojo().setRoleIds(Arrays.asList(new Long[]{0001L})));
         List<XPrivilegesPojo> privileges = xPrivilegesDao.getTreePrivileges(new XPrivilegesPojo().setIds(priIds).setMenuLevel(0L).setPermissionType(1L));
 //        t4t1(privileges,priIds);
         log.info(JSON.toJSONString(privileges));

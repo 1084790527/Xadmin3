@@ -4,16 +4,16 @@ import java.util.Date;
 import java.util.List;
 
 public class XServicePojo {
-    private String id;
+    private Long id;
     private String name;
     private String realName;
     private String mobileNo;
     private String state;
     private List<String> inState;
     private Date regDate;
-    private String creOperId;
+    private Long creOperId;
     private Date creOperDate;
-    private String lastOperId;
+    private Long lastOperId;
     private Date lastOperDate;
 
     public List<String> getInState() {
@@ -25,10 +25,10 @@ public class XServicePojo {
         return this;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
-    public XServicePojo setId(String id) {
+    public XServicePojo setId(Long id) {
         this.id = id;
         return this;
     }
@@ -73,10 +73,10 @@ public class XServicePojo {
         return this;
     }
 
-    public String getCreOperId() {
+    public Long getCreOperId() {
         return creOperId;
     }
-    public XServicePojo setCreOperId(String creOperId) {
+    public XServicePojo setCreOperId(Long creOperId) {
         this.creOperId = creOperId;
         return this;
     }
@@ -89,10 +89,10 @@ public class XServicePojo {
         return this;
     }
 
-    public String getLastOperId() {
+    public Long getLastOperId() {
         return lastOperId;
     }
-    public XServicePojo setLastOperId(String lastOperId) {
+    public XServicePojo setLastOperId(Long lastOperId) {
         this.lastOperId = lastOperId;
         return this;
     }

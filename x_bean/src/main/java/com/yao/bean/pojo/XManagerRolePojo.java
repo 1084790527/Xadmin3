@@ -4,30 +4,30 @@ import java.util.Date;
 import java.util.List;
 
 public class XManagerRolePojo {
-    private String managerId;
-    private String roleId;
-    private String creOperId;
+    private Long managerId;
+    private Long roleId;
+    private Long creOperId;
     private Date creOperDate;
-    public String getManagerId() {
+    public Long getManagerId() {
         return managerId;
     }
-    public XManagerRolePojo setManagerId(String managerId) {
+    public XManagerRolePojo setManagerId(Long managerId) {
         this.managerId = managerId;
         return this;
     }
 
-    public String getRoleId() {
+    public Long getRoleId() {
         return roleId;
     }
-    public XManagerRolePojo setRoleId(String roleId) {
+    public XManagerRolePojo setRoleId(Long roleId) {
         this.roleId = roleId;
         return this;
     }
 
-    public String getCreOperId() {
+    public Long getCreOperId() {
         return creOperId;
     }
-    public XManagerRolePojo setCreOperId(String creOperId) {
+    public XManagerRolePojo setCreOperId(Long creOperId) {
         this.creOperId = creOperId;
         return this;
     }

@@ -3,11 +3,11 @@ package com.yao.bean.pojo;
 import java.util.List;
 
 public class XPrivilegesPojo {
-    private String id;
-    private List<String> ids;
+    private Long id;
+    private List<Long> ids;
     private String name;
     private String description;
-    private String parentId;
+    private Long parentId;
     private Long menuLevel;
     private String permission;
     private Long permissionType;
@@ -17,11 +17,11 @@ public class XPrivilegesPojo {
     private String state;
     private List<XPrivilegesPojo> xPrivileges;
 
-    public List<String> getIds() {
+    public List<Long> getIds() {
         return ids;
     }
 
-    public XPrivilegesPojo setIds(List<String> ids) {
+    public XPrivilegesPojo setIds(List<Long> ids) {
         this.ids = ids;
         return this;
     }
@@ -35,10 +35,10 @@ public class XPrivilegesPojo {
         return this;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
-    public XPrivilegesPojo setId(String id) {
+    public XPrivilegesPojo setId(Long id) {
         this.id = id;
         return this;
     }
@@ -59,10 +59,10 @@ public class XPrivilegesPojo {
         return this;
     }
 
-    public String getParentId() {
+    public Long getParentId() {
         return parentId;
     }
-    public XPrivilegesPojo setParentId(String parentId) {
+    public XPrivilegesPojo setParentId(Long parentId) {
         this.parentId = parentId;
         return this;
     }

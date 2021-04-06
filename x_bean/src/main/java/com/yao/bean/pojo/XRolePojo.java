@@ -4,17 +4,17 @@ import java.util.Date;
 import java.util.List;
 
 public class XRolePojo {
-    private String id;
-    private List<String> ids;
+    private Long id;
+    private List<Long> ids;
     private String name;
-    private String serviceId;
+    private Long serviceId;
     private String description;
     private String state;
     private List<String> inState;
     private String defaults;
-    private String creOperId;
+    private Long creOperId;
     private Date creOperDate;
-    private String lastOperId;
+    private Long lastOperId;
     private Date lastOperDate;
 
     public List<String> getInState() {
@@ -26,19 +26,19 @@ public class XRolePojo {
         return this;
     }
 
-    public List<String> getIds() {
+    public List<Long> getIds() {
         return ids;
     }
 
-    public XRolePojo setIds(List<String> ids) {
+    public XRolePojo setIds(List<Long> ids) {
         this.ids = ids;
         return this;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
-    public XRolePojo setId(String id) {
+    public XRolePojo setId(Long id) {
         this.id = id;
         return this;
     }
@@ -51,10 +51,10 @@ public class XRolePojo {
         return this;
     }
 
-    public String getServiceId() {
+    public Long getServiceId() {
         return serviceId;
     }
-    public XRolePojo setServiceId(String serviceId) {
+    public XRolePojo setServiceId(Long serviceId) {
         this.serviceId = serviceId;
         return this;
     }
@@ -83,10 +83,10 @@ public class XRolePojo {
         return this;
     }
 
-    public String getCreOperId() {
+    public Long getCreOperId() {
         return creOperId;
     }
-    public XRolePojo setCreOperId(String creOperId) {
+    public XRolePojo setCreOperId(Long creOperId) {
         this.creOperId = creOperId;
         return this;
     }
@@ -99,10 +99,10 @@ public class XRolePojo {
         return this;
     }
 
-    public String getLastOperId() {
+    public Long getLastOperId() {
         return lastOperId;
     }
-    public XRolePojo setLastOperId(String lastOperId) {
+    public XRolePojo setLastOperId(Long lastOperId) {
         this.lastOperId = lastOperId;
         return this;
     }

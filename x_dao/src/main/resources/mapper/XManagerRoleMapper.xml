@@ -2,21 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yao.dao.XManagerRoleDao">
   <resultMap id="BaseResultMap" type="com.yao.bean.pojo.XManagerRolePojo">
-    <result column="manager_id" jdbcType="VARCHAR" property="managerId" />
-    <result column="role_id" jdbcType="VARCHAR" property="roleId" />
-    <result column="cre_oper_id" jdbcType="VARCHAR" property="creOperId" />
+    <result column="manager_id" jdbcType="NUMERIC" property="managerId" />
+    <result column="role_id" jdbcType="NUMERIC" property="roleId" />
+    <result column="cre_oper_id" jdbcType="NUMERIC" property="creOperId" />
     <result column="cre_oper_date" jdbcType="TIMESTAMP" property="creOperDate" />
   </resultMap>
   <sql id="where">
     <where>
       <if test="managerId != null">
-        and t.manager_id =  #{managerId,jdbcType=VARCHAR}
+        and t.manager_id =  #{managerId,jdbcType=NUMERIC}
       </if>
       <if test="roleId != null">
-        and t.role_id =  #{roleId,jdbcType=VARCHAR}
+        and t.role_id =  #{roleId,jdbcType=NUMERIC}
       </if>
       <if test="creOperId != null">
-        and t.cre_oper_id =  #{creOperId,jdbcType=VARCHAR}
+        and t.cre_oper_id =  #{creOperId,jdbcType=NUMERIC}
       </if>
       <if test="creOperDate != null">
         and t.cre_oper_date =  #{creOperDate,jdbcType=TIMESTAMP}
@@ -25,20 +25,20 @@
   </sql>
   <sql id="keyWhere">
     <where>
-      and t.manager_id =  #{managerId,jdbcType=VARCHAR}
-      and t.role_id =  #{roleId,jdbcType=VARCHAR}
+      and t.manager_id =  #{managerId,jdbcType=NUMERIC}
+      and t.role_id =  #{roleId,jdbcType=NUMERIC}
     </where>
   </sql>
   <sql id="insertColumnsVal">
     <trim prefix="values(" suffix=")" suffixOverrides=",">
       <if test="managerId != null" >
-        #{managerId,jdbcType=VARCHAR},
+        #{managerId,jdbcType=NUMERIC},
       </if>
       <if test="roleId != null" >
-        #{roleId,jdbcType=VARCHAR},
+        #{roleId,jdbcType=NUMERIC},
       </if>
       <if test="creOperId != null" >
-        #{creOperId,jdbcType=VARCHAR},
+        #{creOperId,jdbcType=NUMERIC},
       </if>
       <if test="creOperDate != null" >
         #{creOperDate,jdbcType=TIMESTAMP},
@@ -66,13 +66,13 @@
   <sql id="updateColumnVal">
     <set>
       <if test="managerId != null" >
-        manager_id = #{managerId,jdbcType=VARCHAR},
+        manager_id = #{managerId,jdbcType=NUMERIC},
       </if>
       <if test="roleId != null" >
-        role_id = #{roleId,jdbcType=VARCHAR},
+        role_id = #{roleId,jdbcType=NUMERIC},
       </if>
       <if test="creOperId != null" >
-        cre_oper_id = #{creOperId,jdbcType=VARCHAR},
+        cre_oper_id = #{creOperId,jdbcType=NUMERIC},
       </if>
       <if test="creOperDate != null" >
         cre_oper_date = #{creOperDate,jdbcType=TIMESTAMP},
@@ -95,7 +95,7 @@
     <select id="getRecordListByWhere" resultMap="BaseResultMap" >
         SELECT * FROM x_manager_role t <include refid="where" />
     </select>
-    <select id="getRoleIdListByWhere" resultType="java.lang.String">
+    <select id="getRoleIdListByWhere" resultType="java.lang.Long">
         SELECT t.role_id AS roleId FROM x_manager_role t <include refid="where" />
     </select>
 
@@ -107,10 +107,10 @@
         DELETE FROM x_manager_role
         <where>
           <if test="managerId != null">
-            and manager_id =  #{managerId,jdbcType=VARCHAR}
+            and manager_id =  #{managerId,jdbcType=NUMERIC}
           </if>
           <if test="roleId != null">
-            and role_id =  #{roleId,jdbcType=VARCHAR}
+            and role_id =  #{roleId,jdbcType=NUMERIC}
           </if>
         </where>
     </update>

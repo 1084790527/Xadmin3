@@ -15,7 +15,7 @@
   <sql id="where">
     <where>
       <if test="id != null">
-        and t.id =  #{id,jdbcType=VARCHAR}
+        and t.id =  #{id,jdbcType=NUMERIC}
       </if>
       <if test="requestUrl != null">
         and t.request_url =  #{requestUrl,jdbcType=VARCHAR}
@@ -36,7 +36,7 @@
         and t.cre_date =  #{creDate,jdbcType=TIMESTAMP}
       </if>
       <if test="managerId != null">
-        and t.manager_id =  #{managerId,jdbcType=VARCHAR}
+        and t.manager_id =  #{managerId,jdbcType=NUMERIC}
       </if>
       <if test="type != null">
         and t.type =  #{type,jdbcType=VARCHAR}
@@ -45,13 +45,13 @@
   </sql>
   <sql id="keyWhere">
     <where>
-      and t.id =  #{id,jdbcType=VARCHAR}
+      and t.id =  #{id,jdbcType=NUMERIC}
     </where>
   </sql>
   <sql id="insertColumnsVal">
     <trim prefix="values(" suffix=")" suffixOverrides=",">
       <if test="id != null" >
-        #{id,jdbcType=VARCHAR},
+        #{id,jdbcType=NUMERIC},
       </if>
       <if test="requestUrl != null" >
         #{requestUrl,jdbcType=VARCHAR},
@@ -72,7 +72,7 @@
         #{creDate,jdbcType=TIMESTAMP},
       </if>
       <if test="managerId != null" >
-        #{managerId,jdbcType=VARCHAR},
+        #{managerId,jdbcType=NUMERIC},
       </if>
       <if test="type != null" >
         #{type,jdbcType=VARCHAR},
@@ -115,7 +115,7 @@
   <sql id="updateColumnVal">
     <set>
       <if test="id != null" >
-        id = #{id,jdbcType=VARCHAR},
+        id = #{id,jdbcType=NUMERIC},
       </if>
       <if test="requestUrl != null" >
         request_url = #{requestUrl,jdbcType=VARCHAR},
@@ -136,7 +136,7 @@
         cre_date = #{creDate,jdbcType=TIMESTAMP},
       </if>
       <if test="managerId != null" >
-        manager_id = #{managerId,jdbcType=VARCHAR},
+        manager_id = #{managerId,jdbcType=NUMERIC},
       </if>
       <if test="type != null" >
         type = #{type,jdbcType=VARCHAR},
@@ -150,14 +150,14 @@
 
     <insert id="insertTable">
         CREATE TABLE ${tableName}(
-          id VARCHAR(20),
+          id BIGINT,
           request_url VARCHAR(200) COMMENT '请求url',
           method VARCHAR(10) COMMENT 'url请求方式',
           ip VARCHAR(80) COMMENT '请求ip',
           class_method VARCHAR(100) COMMENT '类方法',
           args VARCHAR(8192) COMMENT '请求参数',
           cre_date DATETIME COMMENT '请求时间',
-          manager_id VARCHAR(20) COMMENT '操作员id 可能空',
+          manager_id BIGINT COMMENT '操作员id 可能空',
           type VARCHAR(2) DEFAULT '0' COMMENT '1 登入成功后操作有操作员id  0 还没有登入没有操作员id',
           PRIMARY KEY (id)
         )
@@ -185,7 +185,7 @@
     </update>
 
     <update id="deleteRecordByKey">
-        DELETE FROM x_system_log WHERE id = #{id,jdbcType=VARCHAR}
+        DELETE FROM x_system_log WHERE id = #{id,jdbcType=NUMERIC}
     </update>
 
     <update id="updateEngine">

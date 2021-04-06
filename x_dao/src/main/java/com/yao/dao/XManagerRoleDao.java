@@ -12,7 +12,7 @@ public interface XManagerRoleDao {
 
     public List<XManagerRolePojo> getRecordListByWhere(XManagerRolePojo record);
 
-    public List<String> getRoleIdListByWhere(XManagerRolePojo record);
+    public List<Long> getRoleIdListByWhere(XManagerRolePojo record);
 
     public int updateRecordByKey(XManagerRolePojo record);
 

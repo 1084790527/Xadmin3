@@ -10,7 +10,7 @@ import java.util.List;
 
 
 public class RoleTreeBean {
-    private String id;                      //节点唯一索引值，用于对指定节点进行各类操作
+    private Long id;                      //节点唯一索引值，用于对指定节点进行各类操作
     private String title;                   //节点标题
     private String field;                   //节点字段名
     private List<RoleTreeBean> children;    //子节点。支持设定选项同父节点
@@ -19,11 +19,11 @@ public class RoleTreeBean {
     private Boolean checked;                //节点是否初始为选中状态（如果开启复选框的话），默认 false
     private Boolean disabled;               //节点是否为禁用状态。默认 false
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public RoleTreeBean setId(String id) {
+    public RoleTreeBean setId(Long id) {
         this.id = id;
         return this;
     }

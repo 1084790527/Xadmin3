@@ -4,14 +4,14 @@ import java.util.Date;
 
 public class XSystemLogPojo {
     private String tableName;
-    private String id;
+    private Long id;
     private String requestUrl;
     private String method;
     private String ip;
     private String classMethod;
     private String args;
     private Date creDate;
-    private String managerId;
+    private Long managerId;
     private String type;
 
     public String getTableName() {
@@ -23,10 +23,10 @@ public class XSystemLogPojo {
         return this;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
-    public XSystemLogPojo setId(String id) {
+    public XSystemLogPojo setId(Long id) {
         this.id = id;
         return this;
     }
@@ -79,10 +79,10 @@ public class XSystemLogPojo {
         return this;
     }
 
-    public String getManagerId() {
+    public Long getManagerId() {
         return managerId;
     }
-    public XSystemLogPojo setManagerId(String managerId) {
+    public XSystemLogPojo setManagerId(Long managerId) {
         this.managerId = managerId;
         return this;
     }

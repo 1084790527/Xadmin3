@@ -38,7 +38,7 @@ public class AuthorityService {
     @Autowired
     private XRolePrivilegesDao xRolePrivilegesDao;
 
-    public void menuExclusion(List<XPrivilegesPojo> privileges,List<String> priIds,boolean b){
+    public void menuExclusion(List<XPrivilegesPojo> privileges,List<Long> priIds,boolean b){
         List<XPrivilegesPojo> removes = new ArrayList<>();
         privileges.forEach(privilege -> {
             if (b){
@@ -66,20 +66,20 @@ public class AuthorityService {
     }
 
     public  List<XPrivilegesPojo> getTreeMenuList(boolean b) {
-        List<String> privilegesIds = getPriIds();
+        List<Long> privilegesIds = getPriIds();
         List<XPrivilegesPojo> privileges = xPrivilegesDao.getTreePrivileges(new XPrivilegesPojo().setIds(privilegesIds).setMenuLevel(0L).setState("1"));
         menuExclusion(privileges,privilegesIds,b);
         return privileges;
     }
-    public List<String> getPriIds(){
-        String managerId = LoginUser.getId();
-        List<String> roleIds = xManagerRoleDao.getRoleIdListByWhere(new XManagerRolePojo().setManagerId(managerId));
+    public List<Long> getPriIds(){
+        Long managerId = LoginUser.getId();
+        List<Long> roleIds = xManagerRoleDao.getRoleIdListByWhere(new XManagerRolePojo().setManagerId(managerId));
         return getPriIds(roleIds);
     }
 
-    public List<String> getPriIds(List<String> roleIds){
+    public List<Long> getPriIds(List<Long> roleIds){
         roleIds = xRoleDao.getIdsListByWhere(new XRolePojo().setIds(roleIds).setState("1"));
-        List<String> privilegesIds = xRolePrivilegesDao.getPriIdsListByWhere(new XRolePrivilegesPojo().setRoleIds(roleIds));
+        List<Long> privilegesIds = xRolePrivilegesDao.getPriIdsListByWhere(new XRolePrivilegesPojo().setRoleIds(roleIds));
         return privilegesIds;
     }
     public void treePriToRoleBean(List<RoleTreeBean> retBean, List<XPrivilegesPojo> allTreePojo){
@@ -99,28 +99,28 @@ public class AuthorityService {
      * @return
      */
     public List<XPrivilegesPojo> obtainPriAuthoritys() {
-        List<String> privilegesIds = getPriIds();
+        List<Long> privilegesIds = getPriIds();
         List<XPrivilegesPojo> privileges = xPrivilegesDao.getRecordListByWhere(new XPrivilegesPojo().setIds(privilegesIds).setState("1"));
         return privileges;
     }
 
     public boolean isPri(String perm){
-        List<String> privilegesIds = getPriIds();
+        List<Long> privilegesIds = getPriIds();
         List<XPrivilegesPojo> privileges = xPrivilegesDao.getRecordListByWhere(new XPrivilegesPojo().setIds(privilegesIds).setState("1").setPermission(perm));
         if (privileges == null || privileges.size() == 0)
             return false;
         return true;
     }
 
-    public List<String> getPriEndIds(String roleId) {
-        List<String> privilegesIds = xRolePrivilegesDao.getPriIdsListByWhere(new XRolePrivilegesPojo().setRoleId(roleId));
+    public List<Long> getPriEndIds(Long roleId) {
+        List<Long> privilegesIds = xRolePrivilegesDao.getPriIdsListByWhere(new XRolePrivilegesPojo().setRoleId(roleId));
         List<XPrivilegesPojo> privileges = xPrivilegesDao.getTreePrivileges(new XPrivilegesPojo().setIds(privilegesIds).setMenuLevel(0L).setState("1"));
         menuExclusion(privileges,privilegesIds,false);
-        List<String> retList = new ArrayList<>();
+        List<Long> retList = new ArrayList<>();
         getPriEndIds(retList,privileges);
         return retList;
     }
-    public void getPriEndIds(List<String> retList,List<XPrivilegesPojo> privileges) {
+    public void getPriEndIds(List<Long> retList,List<XPrivilegesPojo> privileges) {
         for (XPrivilegesPojo privilege : privileges) {
             if (privilege.getxPrivileges() == null || privilege.getxPrivileges().size()==0){
                 retList.add(privilege.getId());

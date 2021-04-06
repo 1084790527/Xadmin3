@@ -4,8 +4,8 @@ import java.util.Date;
 import java.util.List;
 
 public class XManagerPojo {
-    private String id;
-    private String serviceId;
+    private Long id;
+    private Long serviceId;
     private String nickname;
     private String mobileNo;
     private String password;
@@ -14,7 +14,7 @@ public class XManagerPojo {
     private List<String> inState;
     private Date updateDate;
     private Date lastLoginDate;
-    private String lastOperId;
+    private Long lastOperId;
     private Date lastOperDate;
     private String lastLoginIp;
     private String defaults;
@@ -28,18 +28,18 @@ public class XManagerPojo {
         return this;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
-    public XManagerPojo setId(String id) {
+    public XManagerPojo setId(Long id) {
         this.id = id;
         return this;
     }
 
-    public String getServiceId() {
+    public Long getServiceId() {
         return serviceId;
     }
-    public XManagerPojo setServiceId(String serviceId) {
+    public XManagerPojo setServiceId(Long serviceId) {
         this.serviceId = serviceId;
         return this;
     }
@@ -100,10 +100,10 @@ public class XManagerPojo {
         return this;
     }
 
-    public String getLastOperId() {
+    public Long getLastOperId() {
         return lastOperId;
     }
-    public XManagerPojo setLastOperId(String lastOperId) {
+    public XManagerPojo setLastOperId(Long lastOperId) {
         this.lastOperId = lastOperId;
         return this;
     }

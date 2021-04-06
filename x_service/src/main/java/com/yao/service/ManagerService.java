@@ -50,13 +50,13 @@ public class ManagerService {
     private XManagerRoleDao xManagerRoleDao;
 
     public ResObj managerData(XManagerTab tab) {
-        String id = tab.getId();
+        Long id = tab.getId();
         String nickname = tab.getNickname();
         String mobileNo = tab.getMobileNo();
         String state = tab.getState();
         XManagerPojo sel = new XManagerPojo();
         sel.setServiceId(LoginUser.getServiceId());
-        if (StringUtils.isNotBlank(id))
+        if (id != null)
             sel.setId(id);
         if (StringUtils.isNotBlank(nickname))
             sel.setNickname(nickname);
@@ -75,8 +75,8 @@ public class ManagerService {
         List<XManagerModel> models = new ArrayList<>();
         for (XManagerPojo pojo : page.getResult()) {
             XManagerModel model = new XManagerModel(pojo);
-            String lastOperId = pojo.getLastOperId();
-            if (StringUtils.isNotBlank(lastOperId))
+            Long lastOperId = pojo.getLastOperId();
+            if (lastOperId != null)
                 model.setLastOperName(xManagerDao.getRecordByKey(new XManagerPojo().setId(lastOperId)).getNickname());
             models.add(model);
         }
@@ -92,7 +92,7 @@ public class ManagerService {
         String nickname = model.getNickname();
         String mobileNo = model.getMobileNo();
         String password = model.getPassword();
-        List<String> roleIds = model.getRoleIds();
+        List<Long> roleIds = model.getRoleIds();
         if (StringUtils.isBlank(nickname))
             throw new CustException("昵称不能空");
         if (StringUtils.isBlank(mobileNo) || mobileNo.length() > 11)
@@ -101,32 +101,32 @@ public class ManagerService {
             throw new CustException("密码不能空并且长度不能小于6");
         if (roleIds == null || roleIds.size() == 0)
             throw new CustException("角色必须选择");
-        String managerId = LoginUser.getId();
-        String serviceId = LoginUser.getServiceId();
-        for (String roleId : roleIds) {
+        Long managerId = LoginUser.getId();
+        Long serviceId = LoginUser.getServiceId();
+        for (Long roleId : roleIds) {
             if (xRoleDao.getRecordByWhere(new XRolePojo().setId(roleId).setState("1").setServiceId(serviceId)) == null)
                 throw new CustException("选择的角色不存在或者已删除");
         }
-        String id = idWorker.nextId();
+        Long id = idWorker.nextId();
         xManagerDao.insertRecord(new XManagerPojo().setId(id).setServiceId(serviceId).setNickname(nickname)
                 .setMobileNo(mobileNo).setPassword(MD5Util.getMD5Str(password)).setRegDate(new Date()).setState("1").setDefaults("0"));
-        for (String roleId : roleIds) {
+        for (Long roleId : roleIds) {
             xManagerRoleDao.insertRecord(new XManagerRolePojo().setManagerId(id).setRoleId(roleId).setCreOperId(managerId).setCreOperDate(new Date()));
         }
 
     }
 
     public ResObj modifyData(XManagerModel model) {
-        String id = model.getId();
-        if (StringUtils.isBlank(id))
+        Long id = model.getId();
+        if (id == null)
             throw new CustException("修改异常");
-        String service = LoginUser.getServiceId();
+        Long service = LoginUser.getServiceId();
         XManagerPojo manager = xManagerDao.getRecordByWhere(new XManagerPojo().setId(id).setInState(Arrays.asList(new String[]{"1", "0"})).setServiceId(service).setDefaults("0"));
         if (manager == null)
             throw new CustException("修改的数据不存在或者已删除");
         XManagerModel retModel = new XManagerModel(manager);
         List<XRolePojo> roles = xRoleDao.getRecordListByWhere(new XRolePojo().setState("1").setServiceId(LoginUser.getServiceId()));
-        List<String> roleIds = xManagerRoleDao.getRoleIdListByWhere(new XManagerRolePojo().setManagerId(id));
+        List<Long> roleIds = xManagerRoleDao.getRoleIdListByWhere(new XManagerRolePojo().setManagerId(id));
         List<XRoleModel> xRoleModels = new ArrayList<>();
         for (XRolePojo role : roles) {
             if (roleIds.contains(role.getId()))
@@ -141,9 +141,9 @@ public class ManagerService {
     public void modify(XManagerModel model) {
         String nickname = model.getNickname();
         String mobileNo = model.getMobileNo();
-        List<String> roleIds = model.getRoleIds();
-        String id = model.getId();
-        if (StringUtils.isBlank(id))
+        List<Long> roleIds = model.getRoleIds();
+        Long id = model.getId();
+        if (id == null)
             throw new CustException("修改异常");
         if (StringUtils.isBlank(nickname))
             throw new CustException("昵称不能空");
@@ -152,32 +152,32 @@ public class ManagerService {
         if (roleIds == null || roleIds.size() == 0)
             throw new CustException("角色必须选择");
 
-        String managerId = LoginUser.getId();
-        String serviceId = LoginUser.getServiceId();
+        Long managerId = LoginUser.getId();
+        Long serviceId = LoginUser.getServiceId();
         XManagerPojo manager = xManagerDao.getRecordByWhere(new XManagerPojo().setId(id).setInState(Arrays.asList(new String[]{"1", "0"})).setServiceId(serviceId).setDefaults("0"));
         if (manager == null)
             throw new CustException("修改的数据不存在或者已删除");
-        for (String roleId : roleIds) {
+        for (Long roleId : roleIds) {
             if (xRoleDao.getRecordByWhere(new XRolePojo().setId(roleId).setState("1").setServiceId(serviceId)) == null)
                 throw new CustException("选择的角色不存在或者已删除");
         }
         xManagerDao.updateRecordByKey(new XManagerPojo().setId(id).setNickname(nickname).setMobileNo(mobileNo).setLastLoginDate(new Date()).setLastOperId(managerId));
         xManagerRoleDao.deleteRecordByKey(new XManagerRolePojo().setManagerId(id));
-        for (String roleId : roleIds) {
+        for (Long roleId : roleIds) {
             xManagerRoleDao.insertRecord(new XManagerRolePojo().setManagerId(id).setRoleId(roleId).setCreOperDate(new Date()).setCreOperId(managerId));
         }
 
     }
 
     public void upState(XManagerModel model) {
-        String id = model.getId();
+        Long id = model.getId();
         String state = model.getState();
-        if (StringUtils.isBlank(id))
+        if (id == null)
             throw new CustException("数据异常");
         if (StringUtils.isBlank(state))
             throw new CustException("参数异常");
-        String managerId = LoginUser.getId();
-        String serviceId = LoginUser.getServiceId();
+        Long managerId = LoginUser.getId();
+        Long serviceId = LoginUser.getServiceId();
         if (xManagerDao.getRecordByWhere(new XManagerPojo().setId(id).setInState(Arrays.asList(new String[]{"0", "1"})).setServiceId(serviceId)) == null)
             throw new CustException("数据不存在或已删除");
         xManagerDao.updateRecordByKey(new XManagerPojo().setId(id).setState(state).setLastOperId(managerId).setLastOperDate(new Date()));
@@ -186,11 +186,11 @@ public class ManagerService {
     }
 
     public void resetPass(XManagerModel model) {
-        String id = model.getId();
-        if (StringUtils.isBlank(id))
+        Long id = model.getId();
+        if (id == null)
             throw new CustException("数据异常");
-        String managerId = LoginUser.getId();
-        String serviceId = LoginUser.getServiceId();
+        Long managerId = LoginUser.getId();
+        Long serviceId = LoginUser.getServiceId();
         if (xManagerDao.getRecordByWhere(new XManagerPojo().setId(id).setInState(Arrays.asList(new String[]{"0", "1"})).setServiceId(serviceId)) == null)
             throw new CustException("数据不存在或已删除");
         xManagerDao.updateRecordByKey(new XManagerPojo().setId(id).setPassword(MD5Util.getMD5Str(model.getPassword())).setLastOperDate(new Date()).setLastOperId(managerId));

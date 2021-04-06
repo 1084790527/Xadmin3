@@ -15,7 +15,7 @@ public class XServiceModel extends XServicePojo {
     private String creOperName;
     private String lastOperName;
     private String password;
-    private List<String> roleIds;
+    private List<Long> roleIds;
     private List<XRoleModel> roles;
 
     public List<XRoleModel> getRoles() {
@@ -43,11 +43,11 @@ public class XServiceModel extends XServicePojo {
         setLastOperDate(pojo.getLastOperDate());
     }
 
-    public List<String> getRoleIds() {
+    public List<Long> getRoleIds() {
         return roleIds;
     }
 
-    public XServiceModel setRoleIds(List<String> roleIds) {
+    public XServiceModel setRoleIds(List<Long> roleIds) {
         this.roleIds = roleIds;
         return this;
     }

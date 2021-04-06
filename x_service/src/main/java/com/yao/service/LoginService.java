@@ -70,7 +70,7 @@ public class LoginService {
         loginInfo.setServiceId(manager.getServiceId());
         Map<String,Object> args = new HashMap<>();
         args.put(Consts.LOGIN_INFO,loginInfo);
-        String token = jwtUtil.createJWT(manager.getId(),"",args);
+        String token = jwtUtil.createJWT(manager.getId()+"","",args);
         loginInfo.setToken(token);
         session.setAttribute(Consts.LOGIN_INFO,loginInfo);
     }

@@ -45,10 +45,10 @@ public class AddRoleTest {
 
     @Test
     public void t1(){
-        String managerId = "2221";
-        List<String> roleIds = xManagerRoleDao.getRoleIdListByWhere(new XManagerRolePojo().setManagerId(managerId));
-        roleIds = xRoleDao.getIdsListByWhere(new XRolePojo().setIds(roleIds).setServiceId("1111").setState("1"));
-        List<String> privilegesIds = xRolePrivilegesDao.getPriIdsListByWhere(new XRolePrivilegesPojo().setRoleIds(roleIds));
+        Long managerId = 2221L;
+        List<Long> roleIds = xManagerRoleDao.getRoleIdListByWhere(new XManagerRolePojo().setManagerId(managerId));
+        roleIds = xRoleDao.getIdsListByWhere(new XRolePojo().setIds(roleIds).setServiceId(1111L).setState("1"));
+        List<Long> privilegesIds = xRolePrivilegesDao.getPriIdsListByWhere(new XRolePrivilegesPojo().setRoleIds(roleIds));
         List<XPrivilegesPojo> privileges = xPrivilegesDao.getTreePrivileges(new XPrivilegesPojo().setIds(privilegesIds).setMenuLevel(0L).setState("1"));
 //        log.info(JSON.toJSONString(privileges));
         authorityService.menuExclusion(privileges,privilegesIds,false);
