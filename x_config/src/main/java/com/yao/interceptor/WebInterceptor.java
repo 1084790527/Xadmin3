@@ -43,6 +43,7 @@ public class WebInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String ip = IpAddress.getIpAddress(request);
+        int port = request.getServerPort();
         log.info(request.getServletPath()+"   "+request.getMethod()+"   "+ip);
         HttpSession session = request.getSession();
         String path = request.getServletPath();
@@ -51,13 +52,13 @@ public class WebInterceptor implements HandlerInterceptor {
         try {
             Object o = session.getAttribute(Consts.LOGIN_INFO);
             if (o == null){
-                response.sendRedirect(request.getScheme()+"://"+request.getServerName()+request.getContextPath()+"/login");
+                response.sendRedirect(request.getScheme()+"://"+request.getServerName()+":"+port+request.getContextPath()+"/login");
                 return false;
             }
             LoginInfo info = (LoginInfo) o;
             Claims claims = jwtUtil.parseJWT(info.getToken());
             if (claims == null || !claims.getId().equals(info.getId()+"")){
-                response.sendRedirect(request.getScheme()+"://"+request.getServerName()+"/"+request.getContextPath()+"/login");
+                response.sendRedirect(request.getScheme()+"://"+request.getServerName()+":"+port+request.getContextPath()+"/login");
                 return false;
             }
             if (noVerify.contains(path)){
@@ -83,11 +84,11 @@ public class WebInterceptor implements HandlerInterceptor {
                 if (authority)
                     return true;
             }
-            response.sendRedirect(request.getScheme()+"://"+request.getServerName()+request.getContextPath()+"/error/404");
+            response.sendRedirect(request.getScheme()+"://"+request.getServerName()+":"+port+request.getContextPath()+"/error/404");
             return false;
         }catch (Exception e){
             log.error("拦截器异常："+e);
-            response.sendRedirect(request.getScheme()+"://"+request.getServerName()+"/"+request.getContextPath()+"/login");
+            response.sendRedirect(request.getScheme()+"://"+request.getServerName()+":"+port+request.getContextPath()+"/login");
             return false;
         }
     }
