@@ -13,10 +13,13 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 
 @RequestMapping
 @Controller
@@ -34,10 +37,10 @@ public class BaseController {
     public String main(){
         return "redirect:/index";
     }
-    @GetMapping
-    public String index(){
-        return "index";
-    }
+//    @GetMapping
+//    public String index(){
+//        return "index";
+//    }
     @GetMapping(value = "login")
     public String login(){
         Object o = session.getAttribute(Consts.LOGIN_INFO);
@@ -77,5 +80,12 @@ public class BaseController {
 //        }
         session.removeAttribute(Consts.LOGIN_INFO);
         return "redirect:/login";
+    }
+
+    //短链接实现
+    @GetMapping(value = "/red/{id}")
+    public void red(@PathVariable(name = "id") String id,HttpServletResponse response) throws IOException {
+        log.info(id);
+        response.sendRedirect("http://www.baidu.com");
     }
 }

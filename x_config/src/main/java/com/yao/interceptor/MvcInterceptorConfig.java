@@ -56,6 +56,7 @@ public class MvcInterceptorConfig extends WebMvcConfigurationSupport {
                 .excludePathPatterns("/swagger/**")
                 .excludePathPatterns("/swagger-resources/**")
                 .excludePathPatterns("/v3/api-docs")
+                .excludePathPatterns("/red/**")
         ;
         super.addInterceptors(registry);
     }
