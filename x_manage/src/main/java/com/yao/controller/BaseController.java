@@ -34,6 +34,10 @@ public class BaseController {
     public String main(){
         return "redirect:/index";
     }
+    @GetMapping
+    public String index(){
+        return "index";
+    }
     @GetMapping(value = "login")
     public String login(){
         Object o = session.getAttribute(Consts.LOGIN_INFO);
@@ -55,6 +59,10 @@ public class BaseController {
      * @return 映射页面
      */
 //    @GetMapping(value = {"{path:\\b(?!static\\b)\\w+}/**"})
+//    @GetMapping(value = {"{path:(?!static\\b)\\w+}/**"})
+//    public String path(){
+//        return request.getServletPath();
+//    }
     @GetMapping(value = {"{path:(?!static\\b)\\w+}/**"})
     public String path(){
         return request.getServletPath();
