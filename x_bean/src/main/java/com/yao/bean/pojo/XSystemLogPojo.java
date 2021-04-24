@@ -1,9 +1,13 @@
 package com.yao.bean.pojo;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+
 import java.util.Date;
 
 public class XSystemLogPojo {
     private String tableName;
+    @JsonSerialize(using=ToStringSerializer.class)
     private Long id;
     private String requestUrl;
     private String method;
@@ -11,6 +15,7 @@ public class XSystemLogPojo {
     private String classMethod;
     private String args;
     private Date creDate;
+    @JsonSerialize(using=ToStringSerializer.class)
     private Long managerId;
     private String type;
 

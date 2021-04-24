@@ -1,13 +1,20 @@
 package com.yao.bean.pojo;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+
 import java.util.List;
 
 public class XPrivilegesPojo {
+    @JsonSerialize(using=ToStringSerializer.class)
     private Long id;
+    @JsonSerialize(using=ToStringSerializer.class)
     private List<Long> ids;
     private String name;
     private String description;
+    @JsonSerialize(using=ToStringSerializer.class)
     private Long parentId;
+    @JsonSerialize(using=ToStringSerializer.class)
     private Long menuLevel;
     private String permission;
     private Long permissionType;

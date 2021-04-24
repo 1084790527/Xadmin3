@@ -1,11 +1,17 @@
 package com.yao.bean.pojo;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+
 import java.util.Date;
 import java.util.List;
 
 public class XManagerRolePojo {
+    @JsonSerialize(using=ToStringSerializer.class)
     private Long managerId;
+    @JsonSerialize(using=ToStringSerializer.class)
     private Long roleId;
+    @JsonSerialize(using=ToStringSerializer.class)
     private Long creOperId;
     private Date creOperDate;
     public Long getManagerId() {

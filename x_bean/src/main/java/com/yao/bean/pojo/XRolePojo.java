@@ -1,19 +1,28 @@
 package com.yao.bean.pojo;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+
 import java.util.Date;
 import java.util.List;
 
 public class XRolePojo {
+    @JsonSerialize(using=ToStringSerializer.class)
     private Long id;
+    @JsonSerialize(using=ToStringSerializer.class)
     private List<Long> ids;
     private String name;
+    @JsonSerialize(using=ToStringSerializer.class)
     private Long serviceId;
     private String description;
     private String state;
+    @JsonSerialize(using=ToStringSerializer.class)
     private List<String> inState;
     private String defaults;
+    @JsonSerialize(using=ToStringSerializer.class)
     private Long creOperId;
     private Date creOperDate;
+    @JsonSerialize(using=ToStringSerializer.class)
     private Long lastOperId;
     private Date lastOperDate;
 

@@ -1,10 +1,15 @@
 package com.yao.bean.pojo;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+
 import java.util.Date;
 import java.util.List;
 
 public class XManagerPojo {
+    @JsonSerialize(using=ToStringSerializer.class)
     private Long id;
+    @JsonSerialize(using=ToStringSerializer.class)
     private Long serviceId;
     private String nickname;
     private String mobileNo;
@@ -14,6 +19,7 @@ public class XManagerPojo {
     private List<String> inState;
     private Date updateDate;
     private Date lastLoginDate;
+    @JsonSerialize(using=ToStringSerializer.class)
     private Long lastOperId;
     private Date lastOperDate;
     private String lastLoginIp;
