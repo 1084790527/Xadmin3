@@ -21,6 +21,7 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -88,7 +89,8 @@ public class XAdminApplication {
 			@Override
 			public void customize(Jackson2ObjectMapperBuilder jacksonObjectMapperBuilder) {
 				jacksonObjectMapperBuilder.serializerByType(Long.class, ToStringSerializer.instance)
-						.serializerByType(Long.TYPE, ToStringSerializer.instance);
+						.serializerByType(Long.TYPE, ToStringSerializer.instance)
+						.serializerByType(BigDecimal.class,ToStringSerializer.instance);
 			}
 		};
 		return customizer;

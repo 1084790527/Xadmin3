@@ -6,9 +6,9 @@ spring:
   mvc:
     static-path-pattern: /static/**
   resources:
-    static-locations: classpath:/static/
+    static-locations: file:/static/ #必须使用外置html
   thymeleaf:
-    prefix: classpath:/templates/
+    prefix: file:/templates/ #必须使用外置html
     suffix: .html
     mode: HTML5
     encoding: UTF-8

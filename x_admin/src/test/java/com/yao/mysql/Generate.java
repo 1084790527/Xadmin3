@@ -13,8 +13,8 @@ import java.util.List;
  * @date : 20:20 2020/7/25
  */
 public class Generate {
-    private static final String DATE_TABLE = "xadmin3";
-    private static final String DATA_BASE = "x_system_log";
+    private static final String DATE_TABLE = "ldm";
+    private static final String DATA_BASE = "tb_esignture_contract_lockend";
     private static final String USER = "root";
     private static final String PASS = "wingzz00";
     private static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
