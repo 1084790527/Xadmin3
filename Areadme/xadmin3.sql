@@ -137,7 +137,7 @@ ALTER TABLE x_system_log ENGINE = MERGE UNION = (x_system_log_202103,x_system_lo
 启用  enable
 删除  delete
   INSERT INTO `xadmin3`.`x_role_privileges`(`role_id`, `privileges_id`) VALUES ('0001', '92121');
-
+``
 CREATE TABLE t_table(
   id BIGINT,
   class_method VARCHAR(100),
@@ -146,3 +146,5 @@ CREATE TABLE t_table(
   PRIMARY KEY (id)
 )
   ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='jpa测试表';
+
+sadasd
